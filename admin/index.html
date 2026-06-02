@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — Akanksha Analytical</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary:#0f172a; --accent:#10b981; --accent2:#059669;
+      --blue:#3b82f6; --danger:#ef4444; --warn:#f59e0b;
+      --surface:#f1f5f9; --card:#ffffff; --border:#e2e8f0;
+      --text:#1e293b; --muted:#64748b; --sidebar-w:240px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Plus Jakarta Sans",sans-serif;}
+    body{background:var(--surface);color:var(--text);min-height:100vh;display:flex;}
+
+    /* LOGIN */
+    #loginScreen{position:fixed;inset:0;background:var(--primary);display:flex;align-items:center;justify-content:center;z-index:9999;}
+    .login-box{background:#1e293b;border-radius:20px;padding:48px 40px;width:380px;border:1px solid rgba(255,255,255,0.07);box-shadow:0 40px 80px rgba(0,0,0,0.5);}
+    .login-logo{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+    .login-logo-icon{width:46px;height:46px;background:var(--accent);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.25rem;}
+    .login-logo span{color:#fff;font-weight:800;font-size:1.05rem;line-height:1.3;}
+    .login-box h2{color:#fff;font-size:1.5rem;margin-bottom:6px;}
+    .login-box p{color:rgba(255,255,255,0.4);font-size:0.85rem;margin-bottom:28px;}
+    .login-box input{width:100%;padding:13px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:#fff;font-size:0.92rem;outline:none;margin-bottom:14px;font-family:"Plus Jakarta Sans",sans-serif;transition:.2s;}
+    .login-box input:focus{border-color:var(--accent);}
+    .login-box input::placeholder{color:rgba(255,255,255,0.3);}
+    .login-btn{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:0.95rem;cursor:pointer;transition:.25s;}
+    .login-btn:hover{background:var(--accent2);}
+    .login-err{color:#f87171;font-size:0.82rem;margin-top:10px;text-align:center;display:none;}
+    .login-hint{color:rgba(255,255,255,0.25);font-size:0.75rem;text-align:center;margin-top:16px;}
+
+    /* SIDEBAR */
+    #sidebar{width:var(--sidebar-w);background:var(--primary);min-height:100vh;display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;z-index:100;transition:.3s;}
+    .sidebar-logo{display:flex;align-items:center;gap:10px;padding:24px 20px;border-bottom:1px solid rgba(255,255,255,0.07);}
+    .sidebar-logo-icon{width:36px;height:36px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.95rem;flex-shrink:0;}
+    .sidebar-logo span{color:#fff;font-weight:700;font-size:0.85rem;line-height:1.3;}
+    nav{flex:1;padding:16px 12px;overflow-y:auto;}
+    .nav-section{font-size:0.68rem;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,0.25);text-transform:uppercase;padding:12px 8px 6px;}
+    .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);text-decoration:none;cursor:pointer;transition:.2s;margin-bottom:2px;font-size:0.88rem;font-weight:500;}
+    .nav-item:hover{background:rgba(255,255,255,0.07);color:#fff;}
+    .nav-item.active{background:rgba(16,185,129,0.15);color:var(--accent);}
+    .nav-item i{width:18px;text-align:center;font-size:0.9rem;}
+    .sidebar-footer{padding:16px;border-top:1px solid rgba(255,255,255,0.07);}
+    .admin-badge{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.05);border-radius:12px;padding:10px;}
+    .admin-avatar{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;}
+    .admin-info{flex:1;min-width:0;}
+    .admin-name{color:#fff;font-size:0.82rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .admin-role{color:rgba(255,255,255,0.35);font-size:0.72rem;}
+    .logout-btn{background:none;border:none;color:rgba(255,255,255,0.4);cursor:pointer;padding:4px;transition:.2s;font-size:0.9rem;}
+    .logout-btn:hover{color:#f87171;}
+    .badge-count{background:var(--accent);color:#fff;font-size:0.65rem;font-weight:700;padding:2px 7px;border-radius:100px;margin-left:auto;}
+
+    /* MAIN */
+    #mainContent{margin-left:var(--sidebar-w);flex:1;min-height:100vh;display:flex;flex-direction:column;}
+    .topbar{background:var(--card);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+    .topbar-title{font-size:1.1rem;font-weight:700;color:var(--text);}
+    .topbar-right{display:flex;align-items:center;gap:12px;}
+    .topbar-date{font-size:0.8rem;color:var(--muted);}
+    .website-btn{display:flex;align-items:center;gap:6px;background:var(--primary);color:#fff;border:none;border-radius:10px;padding:8px 14px;font-size:0.8rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s;}
+    .website-btn:hover{background:var(--accent);}
+    .page{display:none;padding:28px;flex:1;}
+    .page.active{display:block;}
+
+    /* CARDS */
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:28px;}
+    .stat-card{background:var(--card);border-radius:16px;padding:22px;border:1px solid var(--border);display:flex;align-items:flex-start;gap:16px;transition:.3s;}
+    .stat-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.06);transform:translateY(-2px);}
+    .stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+    .stat-icon.green{background:rgba(16,185,129,0.12);color:var(--accent);}
+    .stat-icon.blue{background:rgba(59,130,246,0.12);color:var(--blue);}
+    .stat-icon.warn{background:rgba(245,158,11,0.12);color:var(--warn);}
+    .stat-icon.danger{background:rgba(239,68,68,0.12);color:var(--danger);}
+    .stat-info h3{font-size:1.8rem;font-weight:800;color:var(--text);line-height:1;}
+    .stat-info p{font-size:0.78rem;color:var(--muted);margin-top:4px;font-weight:500;}
+
+    /* TABLE */
+    .section-card{background:var(--card);border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:24px;}
+    .section-card-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .section-card-header h3{font-size:0.95rem;font-weight:700;}
+    .section-card-header p{font-size:0.8rem;color:var(--muted);margin-top:2px;}
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;font-size:0.82rem;font-weight:600;cursor:pointer;border:none;transition:.2s;}
+    .btn-primary{background:var(--accent);color:#fff;}
+    .btn-primary:hover{background:var(--accent2);}
+    .btn-danger{background:rgba(239,68,68,0.1);color:var(--danger);}
+    .btn-danger:hover{background:var(--danger);color:#fff;}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);}
+    .btn-ghost:hover{background:var(--surface);color:var(--text);}
+    .btn-sm{padding:5px 10px;font-size:0.75rem;}
+    table{width:100%;border-collapse:collapse;}
+    th{background:var(--surface);padding:10px 16px;text-align:left;font-size:0.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+    td{padding:12px 16px;font-size:0.85rem;border-top:1px solid var(--border);}
+    tr:hover td{background:rgba(16,185,129,0.02);}
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:100px;font-size:0.72rem;font-weight:700;}
+    .badge.new{background:rgba(59,130,246,0.1);color:var(--blue);}
+    .badge.in_progress{background:rgba(245,158,11,0.1);color:var(--warn);}
+    .badge.resolved{background:rgba(16,185,129,0.1);color:var(--accent);}
+    .badge.spam{background:rgba(239,68,68,0.1);color:var(--danger);}
+    .badge.active{background:rgba(16,185,129,0.1);color:var(--accent);}
+    .badge.inactive{background:rgba(100,116,139,0.1);color:var(--muted);}
+    .empty-state{text-align:center;padding:60px 20px;color:var(--muted);}
+    .empty-state i{font-size:2.5rem;margin-bottom:12px;display:block;opacity:.3;}
+    .filters{display:flex;gap:10px;flex-wrap:wrap;padding:16px 24px;border-bottom:1px solid var(--border);background:var(--surface);}
+    .filter-btn{padding:6px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted);transition:.2s;}
+    .filter-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+    .search-input{padding:7px 14px;border-radius:10px;border:1px solid var(--border);font-size:0.82rem;outline:none;font-family:"Plus Jakarta Sans",sans-serif;background:var(--card);}
+    .search-input:focus{border-color:var(--accent);}
+
+    /* MODAL */
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:500;display:none;align-items:center;justify-content:center;}
+    .modal-overlay.open{display:flex;}
+    .modal{background:var(--card);border-radius:20px;width:520px;max-width:95vw;max-height:90vh;overflow-y:auto;padding:28px;}
+    .modal h2{font-size:1.1rem;font-weight:700;margin-bottom:20px;}
+    .form-group{margin-bottom:16px;}
+    .form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--muted);margin-bottom:6px;}
+    .form-group input,.form-group select,.form-group textarea{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:10px;font-size:0.88rem;outline:none;font-family:"Plus Jakarta Sans",sans-serif;transition:.2s;}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);}
+    .form-group textarea{resize:vertical;min-height:80px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .modal-footer{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);}
+    .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .detail-item{background:var(--surface);padding:14px;border-radius:10px;}
+    .detail-item .label{font-size:0.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+    .detail-item .value{font-size:0.88rem;font-weight:600;word-break:break-word;}
+    .detail-message{background:var(--surface);padding:14px;border-radius:10px;margin-top:14px;}
+    .detail-message .label{font-size:0.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;margin-bottom:8px;}
+    .detail-message .value{font-size:0.88rem;line-height:1.6;}
+
+    /* TOAST */
+    .toast{position:fixed;bottom:24px;right:24px;background:var(--card);border-radius:14px;padding:14px 18px;box-shadow:0 20px 50px rgba(0,0,0,0.15);display:flex;align-items:center;gap:12px;z-index:9999;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.23,1,.32,1);border:1px solid var(--border);max-width:320px;}
+    .toast.show{transform:translateY(0);opacity:1;}
+    .toast.success .toast-icon{background:rgba(16,185,129,0.12);color:var(--accent);}
+    .toast.error .toast-icon{background:rgba(239,68,68,0.1);color:var(--danger);}
+    .toast-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;}
+    .toast-title{font-size:0.85rem;font-weight:700;}
+    .toast-sub{font-size:0.75rem;color:var(--muted);}
+
+    /* CHART BAR */
+    .mini-chart{display:flex;align-items:flex-end;gap:6px;height:60px;padding-top:8px;}
+    .bar{flex:1;background:linear-gradient(to top,var(--accent),rgba(16,185,129,0.4));border-radius:4px 4px 0 0;min-height:4px;transition:.5s;}
+    .chart-labels{display:flex;gap:6px;margin-top:6px;}
+    .chart-label{flex:1;font-size:0.62rem;color:var(--muted);text-align:center;}
+
+    /* JOBS + SERVICES forms */
+    .toggle-switch{position:relative;width:42px;height:24px;display:inline-block;}
+    .toggle-switch input{display:none;}
+    .toggle-slider{position:absolute;inset:0;background:#cbd5e1;border-radius:100px;cursor:pointer;transition:.3s;}
+    .toggle-slider::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.3s;}
+    .toggle-switch input:checked+.toggle-slider{background:var(--accent);}
+    .toggle-switch input:checked+.toggle-slider::after{transform:translateX(18px);}
+
+    /* SETTINGS */
+    .settings-section{margin-bottom:28px;}
+    .settings-section h4{font-size:0.88rem;font-weight:700;margin-bottom:16px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+
+    @media(max-width:768px){
+      #sidebar{transform:translateX(-100%);}
+      #sidebar.open{transform:translateX(0);}
+      #mainContent{margin-left:0;}
+      .stats-grid{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN SCREEN ── -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-icon"><i class="fas fa-flask"></i></div>
+      <span>Akanksha Analytical<br/><span style="font-size:0.72rem;font-weight:400;color:rgba(255,255,255,0.4);">Admin Panel</span></span>
+    </div>
+    <h2>Welcome Back</h2>
+    <p>Sign in to manage your laboratory portal</p>
+    <input type="text" id="loginUser" placeholder="Username" autocomplete="username"/>
+    <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password"/>
+    <button class="login-btn" onclick="doLogin()">Sign In <i class="fas fa-arrow-right"></i></button>
+    <div class="login-err" id="loginErr">Invalid username or password.</div>
+    <div class="login-hint">Default: admin / Admin@1234</div>
+  </div>
+</div>
+
+<!-- ── SIDEBAR ── -->
+<div id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-icon"><i class="fas fa-flask"></i></div>
+    <span style="color:#fff;font-weight:700;font-size:0.82rem;">Akanksha Analytical<br/><span style="font-size:0.68rem;font-weight:400;color:rgba(255,255,255,0.35);">Admin Panel</span></span>
+  </div>
+  <nav>
+    <div class="nav-section">Main</div>
+    <div class="nav-item active" onclick="showPage('dashboard',this)"><i class="fas fa-chart-line"></i> Dashboard</div>
+    <div class="nav-item" onclick="showPage('inquiries',this)"><i class="fas fa-envelope"></i> Inquiries <span class="badge-count" id="newInqBadge">0</span></div>
+    <div class="nav-section">Content</div>
+    <div class="nav-item" onclick="showPage('jobs',this)"><i class="fas fa-briefcase"></i> Job Openings</div>
+    <div class="nav-item" onclick="showPage('services',this)"><i class="fas fa-flask"></i> Services</div>
+    <div class="nav-section">System</div>
+    <div class="nav-item" onclick="showPage('settings',this)"><i class="fas fa-gear"></i> Settings</div>
+    <div class="nav-item" onclick="showPage('database',this)"><i class="fas fa-database"></i> Database</div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="admin-badge">
+      <div class="admin-avatar"><i class="fas fa-user"></i></div>
+      <div class="admin-info">
+        <div class="admin-name" id="adminNameBadge">Administrator</div>
+        <div class="admin-role">Super Admin</div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()" title="Logout"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div id="mainContent">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-date" id="topbarDate"></div>
+    </div>
+    <div class="topbar-right">
+      <a href="../index.html" target="_blank" class="website-btn"><i class="fas fa-globe"></i> View Website</a>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="page active" id="page-dashboard">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-icon green"><i class="fas fa-envelope"></i></div><div class="stat-info"><h3 id="s-total">0</h3><p>Total Inquiries</p></div></div>
+      <div class="stat-card"><div class="stat-icon blue"><i class="fas fa-star"></i></div><div class="stat-info"><h3 id="s-new">0</h3><p>New Inquiries</p></div></div>
+      <div class="stat-card"><div class="stat-icon warn"><i class="fas fa-briefcase"></i></div><div class="stat-info"><h3 id="s-jobs">0</h3><p>Active Job Posts</p></div></div>
+      <div class="stat-card"><div class="stat-icon danger"><i class="fas fa-flask"></i></div><div class="stat-info"><h3 id="s-services">0</h3><p>Active Services</p></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div class="section-card">
+        <div class="section-card-header"><div><h3>Recent Inquiries</h3><p>Latest 5 contact form submissions</p></div></div>
+        <table>
+          <thead><tr><th>Name</th><th>Service</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody id="recentInqTable"><tr><td colspan="4" class="empty-state"><i class="fas fa-inbox"></i>No inquiries yet</td></tr></tbody>
+        </table>
+      </div>
+      <div class="section-card">
+        <div class="section-card-header"><div><h3>Inquiry Trend (Last 7 Days)</h3></div></div>
+        <div style="padding:20px 24px;">
+          <div class="mini-chart" id="trendChart"></div>
+          <div class="chart-labels" id="trendLabels"></div>
+        </div>
+        <div style="padding:0 24px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <div style="text-align:center;background:var(--surface);border-radius:10px;padding:12px;">
+              <div style="font-size:1.4rem;font-weight:800;color:var(--blue)" id="d-inprog">0</div>
+              <div style="font-size:0.72rem;color:var(--muted)">In Progress</div>
+            </div>
+            <div style="text-align:center;background:var(--surface);border-radius:10px;padding:12px;">
+              <div style="font-size:1.4rem;font-weight:800;color:var(--accent)" id="d-resolved">0</div>
+              <div style="font-size:0.72rem;color:var(--muted)">Resolved</div>
+            </div>
+            <div style="text-align:center;background:var(--surface);border-radius:10px;padding:12px;">
+              <div style="font-size:1.4rem;font-weight:800;color:var(--danger)" id="d-spam">0</div>
+              <div style="font-size:0.72rem;color:var(--muted)">Spam</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INQUIRIES -->
+  <div class="page" id="page-inquiries">
+    <div class="section-card">
+      <div class="section-card-header">
+        <div><h3>Contact Inquiries</h3><p>All form submissions from the website</p></div>
+      </div>
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterInquiries('all',this)">All</button>
+        <button class="filter-btn" onclick="filterInquiries('new',this)">New</button>
+        <button class="filter-btn" onclick="filterInquiries('in_progress',this)">In Progress</button>
+        <button class="filter-btn" onclick="filterInquiries('resolved',this)">Resolved</button>
+        <button class="filter-btn" onclick="filterInquiries('spam',this)">Spam</button>
+        <input class="search-input" id="inqSearch" placeholder="Search name / email…" oninput="renderInquiries()"/>
+      </div>
+      <table>
+        <thead><tr><th>Ref #</th><th>Name</th><th>Email</th><th>Service</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="inqTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- JOBS -->
+  <div class="page" id="page-jobs">
+    <div class="section-card">
+      <div class="section-card-header">
+        <div><h3>Job Openings</h3><p>Manage career postings</p></div>
+        <button class="btn btn-primary" onclick="openJobModal()"><i class="fas fa-plus"></i> Add Job</button>
+      </div>
+      <table>
+        <thead><tr><th>Title</th><th>Type</th><th>Experience</th><th>Location</th><th>Status</th><th>Posted</th><th>Actions</th></tr></thead>
+        <tbody id="jobsTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="page" id="page-services">
+    <div class="section-card">
+      <div class="section-card-header">
+        <div><h3>Services</h3><p>Manage laboratory services</p></div>
+        <button class="btn btn-primary" onclick="openServiceModal()"><i class="fas fa-plus"></i> Add Service</button>
+      </div>
+      <table>
+        <thead><tr><th>Service Name</th><th>Category</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody id="servicesTable"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="page" id="page-settings">
+    <div class="section-card" style="max-width:600px;">
+      <div class="section-card-header"><div><h3>Site Settings</h3><p>Update laboratory information</p></div></div>
+      <div style="padding:24px;">
+        <div class="settings-section">
+          <h4>Contact Information</h4>
+          <div class="form-group"><label>Laboratory Name</label><input type="text" id="set-name" placeholder="Akanksha Analytical and Research Lab"/></div>
+          <div class="form-group"><label>Phone</label><input type="text" id="set-phone" placeholder="020-24240030"/></div>
+          <div class="form-group"><label>Email</label><input type="email" id="set-email" placeholder="akankshalab2007@gmail.com"/></div>
+          <div class="form-group"><label>Address Line 1</label><input type="text" id="set-addr1" placeholder="S. No. 613, Plot No. 5, GangaDham Phase I"/></div>
+          <div class="form-group"><label>Address Line 2</label><input type="text" id="set-addr2" placeholder="Bibwewadi, Pune – 411037"/></div>
+          <div class="form-group"><label>Working Hours</label><input type="text" id="set-hours" placeholder="Mon – Sat: 9:00 AM – 5:30 PM"/></div>
+        </div>
+        <div class="settings-section">
+          <h4>Admin Password</h4>
+          <div class="form-group"><label>Current Password</label><input type="password" id="set-curpw" placeholder="Enter current password"/></div>
+          <div class="form-row">
+            <div class="form-group"><label>New Password</label><input type="password" id="set-newpw" placeholder="New password"/></div>
+            <div class="form-group"><label>Confirm Password</label><input type="password" id="set-confpw" placeholder="Confirm password"/></div>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="saveSettings()" style="width:100%;justify-content:center;padding:12px;">
+          <i class="fas fa-save"></i> Save Settings
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATABASE -->
+  <div class="page" id="page-database">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;">
+      <div class="section-card">
+        <div class="section-card-header"><div><h3>Export Data</h3><p>Download as JSON</p></div></div>
+        <div style="padding:20px;">
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:16px;">Export all inquiries, jobs, and services to a JSON file for backup or import into another system.</p>
+          <button class="btn btn-primary" onclick="exportData()" style="width:100%;justify-content:center;">
+            <i class="fas fa-download"></i> Export All Data
+          </button>
+        </div>
+      </div>
+      <div class="section-card">
+        <div class="section-card-header"><div><h3>Reset Data</h3><p>Clear stored data</p></div></div>
+        <div style="padding:20px;">
+          <p style="font-size:0.84rem;color:var(--muted);margin-bottom:16px;">Reset inquiries, jobs, and services back to sample/demo data. This cannot be undone.</p>
+          <button class="btn btn-danger" onclick="resetData()" style="width:100%;justify-content:center;">
+            <i class="fas fa-trash"></i> Reset to Demo Data
+          </button>
+        </div>
+      </div>
+      <div class="section-card" style="grid-column:1/-1;">
+        <div class="section-card-header"><div><h3>Database Info</h3><p>LocalStorage usage</p></div></div>
+        <div style="padding:20px;" id="dbInfo"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── INQUIRY DETAIL MODAL ── -->
+<div class="modal-overlay" id="inqModal">
+  <div class="modal">
+    <h2><i class="fas fa-envelope" style="color:var(--accent);margin-right:8px;"></i> Inquiry Detail</h2>
+    <div class="detail-grid" id="inqDetailGrid"></div>
+    <div class="detail-message" id="inqDetailMsg"></div>
+    <div style="margin-top:16px;">
+      <label style="font-size:0.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:6px;">Update Status</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-ghost btn-sm" onclick="updateInqStatus('new')">New</button>
+        <button class="btn btn-ghost btn-sm" onclick="updateInqStatus('in_progress')" style="color:var(--warn);">In Progress</button>
+        <button class="btn btn-primary btn-sm" onclick="updateInqStatus('resolved')">Resolved</button>
+        <button class="btn btn-danger btn-sm" onclick="updateInqStatus('spam')">Spam</button>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('inqModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── JOB MODAL ── -->
+<div class="modal-overlay" id="jobModal">
+  <div class="modal">
+    <h2 id="jobModalTitle"><i class="fas fa-briefcase" style="color:var(--accent);margin-right:8px;"></i> Add Job Opening</h2>
+    <input type="hidden" id="jobId"/>
+    <div class="form-group"><label>Job Title *</label><input type="text" id="j-title" placeholder="e.g. Senior Analyst"/></div>
+    <div class="form-row">
+      <div class="form-group"><label>Employment Type</label>
+        <select id="j-type">
+          <option>Full-Time</option><option>Part-Time</option><option>Internship</option><option>Contract</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Location</label><input type="text" id="j-location" value="Pune"/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Experience</label><input type="text" id="j-exp" placeholder="e.g. 3–5 Years"/></div>
+      <div class="form-group"><label>Qualification</label><input type="text" id="j-qual" placeholder="e.g. M.Sc. Chemistry"/></div>
+    </div>
+    <div class="form-group"><label>Description</label><textarea id="j-desc" rows="3" placeholder="Job responsibilities and requirements…"></textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label>Posted On</label><input type="date" id="j-posted"/></div>
+      <div class="form-group"><label>Expires On (optional)</label><input type="date" id="j-expires"/></div>
+    </div>
+    <div class="form-group" style="display:flex;align-items:center;gap:10px;">
+      <label class="toggle-switch"><input type="checkbox" id="j-active" checked/><span class="toggle-slider"></span></label>
+      <span style="font-size:0.85rem;font-weight:600;">Active (visible on website)</span>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('jobModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveJob()"><i class="fas fa-save"></i> Save Job</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── SERVICE MODAL ── -->
+<div class="modal-overlay" id="svcModal">
+  <div class="modal">
+    <h2 id="svcModalTitle"><i class="fas fa-flask" style="color:var(--accent);margin-right:8px;"></i> Add Service</h2>
+    <input type="hidden" id="svcId"/>
+    <div class="form-group"><label>Service Name *</label><input type="text" id="sv-name" placeholder="e.g. Ambient Air Monitoring"/></div>
+    <div class="form-group"><label>Category</label>
+      <select id="sv-cat">
+        <option value="Environmental Analysis">Environmental Analysis</option>
+        <option value="SPCB Licensing & Compliance">SPCB Licensing &amp; Compliance</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Description (optional)</label><textarea id="sv-desc" rows="2" placeholder="Brief description…"></textarea></div>
+    <div class="form-group" style="display:flex;align-items:center;gap:10px;">
+      <label class="toggle-switch"><input type="checkbox" id="sv-active" checked/><span class="toggle-slider"></span></label>
+      <span style="font-size:0.85rem;font-weight:600;">Active (visible on website)</span>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('svcModal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveService()"><i class="fas fa-save"></i> Save Service</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon"></div>
+  <div><div class="toast-title" id="toastTitle"></div><div class="toast-sub" id="toastSub"></div></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  DATABASE — localStorage-based persistence
+// ═══════════════════════════════════════════════════════
+
+const DB = {
+  // ── ADMIN CREDENTIALS ──────────────────────────
+  ADMIN_KEY: 'akal_admin_creds',
+  getAdmin(){ return JSON.parse(localStorage.getItem(this.ADMIN_KEY)||'{"username":"admin","password":"Admin@1234"}'); },
+  saveAdmin(obj){ localStorage.setItem(this.ADMIN_KEY, JSON.stringify(obj)); },
+
+  // ── SETTINGS ───────────────────────────────────
+  SETTINGS_KEY: 'akal_settings',
+  defaultSettings(){
+    return {
+      name:'Akanksha Analytical and Research Lab',
+      phone:'020-24240030',
+      email:'priyakoli2727@gmail.com',
+      addr1:'S. No. 613, Plot No. 5, GangaDham Phase I',
+      addr2:'Bibwewadi, Pune – 411037',
+      hours:'Mon – Sat: 9:00 AM – 5:30 PM'
+    };
+  },
+  getSettings(){ return JSON.parse(localStorage.getItem(this.SETTINGS_KEY)||'null') || this.defaultSettings(); },
+  saveSettings(obj){ localStorage.setItem(this.SETTINGS_KEY, JSON.stringify(obj)); },
+
+  // ── INQUIRIES ──────────────────────────────────
+  INQ_KEY: 'akal_inquiries',
+  getInquiries(){ return JSON.parse(localStorage.getItem(this.INQ_KEY)||'[]'); },
+  saveInquiries(arr){ localStorage.setItem(this.INQ_KEY, JSON.stringify(arr)); },
+
+  // ── JOBS ───────────────────────────────────────
+  JOBS_KEY: 'akal_jobs',
+  defaultJobs(){
+    const today = new Date().toISOString().split('T')[0];
+    return [
+      {id:1,title:'Senior Analyst',type:'Full-Time',experience:'3–5 Years',qualification:'M.Sc. Chemistry / Environmental Science',location:'Pune',description:'Expertise in instrumental analysis (ICP, GC, AAS) and NABL documentation.',posted:today,expires:null,active:true},
+      {id:2,title:'Field Technician',type:'Full-Time',experience:'1–2 Years',qualification:'Diploma/B.Sc.',location:'Pune',description:'Responsible for ambient air, stack, and water sampling across client locations.',posted:today,expires:null,active:true},
+      {id:3,title:'Lab Assistant',type:'Internship',experience:'Freshers Welcome',qualification:'B.Sc. Chemistry / Environmental Science',location:'Pune',description:'Assist senior analysts in day-to-day testing of water and wastewater samples. Duration: 6 months.',posted:today,expires:null,active:true}
+    ];
+  },
+  getJobs(){ return JSON.parse(localStorage.getItem(this.JOBS_KEY)||'null') || this.defaultJobs(); },
+  saveJobs(arr){ localStorage.setItem(this.JOBS_KEY, JSON.stringify(arr)); },
+  nextJobId(){ const jobs=this.getJobs(); return jobs.length ? Math.max(...jobs.map(j=>j.id))+1 : 1; },
+
+  // ── SERVICES ───────────────────────────────────
+  SVC_KEY: 'akal_services',
+  defaultServices(){
+    return [
+      {id:1,name:'Ambient Air Monitoring',category:'Environmental Analysis',description:'',active:true},
+      {id:2,name:'Workplace Air Monitoring',category:'Environmental Analysis',description:'',active:true},
+      {id:3,name:'Stack Emission Monitoring',category:'Environmental Analysis',description:'',active:true},
+      {id:4,name:'Noise Monitoring',category:'Environmental Analysis',description:'',active:true},
+      {id:5,name:'Illumination Monitoring',category:'Environmental Analysis',description:'',active:true},
+      {id:6,name:'Ventilation Survey',category:'Environmental Analysis',description:'',active:true},
+      {id:7,name:'Industrial / Sewage Effluent',category:'Environmental Analysis',description:'',active:true},
+      {id:8,name:'Drinking Water Test',category:'Environmental Analysis',description:'',active:true},
+      {id:9,name:'Microbiological Testing for Water',category:'Environmental Analysis',description:'',active:true},
+      {id:10,name:'Sludge & Soil Testing',category:'Environmental Analysis',description:'',active:true},
+      {id:11,name:'Metal Analysis',category:'Environmental Analysis',description:'',active:true},
+      {id:12,name:'SPCB Consent (CTE & CTO)',category:'SPCB Licensing & Compliance',description:'',active:true},
+      {id:13,name:'Environmental Impact Assessment',category:'SPCB Licensing & Compliance',description:'',active:true},
+      {id:14,name:'Pollution Control Compliance',category:'SPCB Licensing & Compliance',description:'',active:true},
+      {id:15,name:'Environmental Statutory Audit',category:'SPCB Licensing & Compliance',description:'',active:true},
+      {id:16,name:'Regulatory Authority Liaison',category:'SPCB Licensing & Compliance',description:'',active:true}
+    ];
+  },
+  getServices(){ return JSON.parse(localStorage.getItem(this.SVC_KEY)||'null') || this.defaultServices(); },
+  saveServices(arr){ localStorage.setItem(this.SVC_KEY, JSON.stringify(arr)); },
+  nextSvcId(){ const s=this.getServices(); return s.length ? Math.max(...s.map(x=>x.id))+1 : 1; }
+};
+
+// ═══════════════════════════════════════════════════════
+//  AUTH
+// ═══════════════════════════════════════════════════════
+let currentAdmin = null;
+
+function doLogin(){
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const admin = DB.getAdmin();
+  if(u === admin.username && p === admin.password){
+    currentAdmin = admin;
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('adminNameBadge').textContent = admin.username;
+    loadAll();
+  } else {
+    document.getElementById('loginErr').style.display='block';
+    setTimeout(()=>document.getElementById('loginErr').style.display='none',3000);
+  }
+}
+function doLogout(){
+  currentAdmin=null;
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('loginUser').value='';
+  document.getElementById('loginPass').value='';
+}
+document.getElementById('loginPass').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
+
+// ═══════════════════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════════════════
+const pageTitles = {dashboard:'Dashboard',inquiries:'Inquiries',jobs:'Job Openings',services:'Services',settings:'Settings',database:'Database'};
+
+function showPage(id, el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(el) el.classList.add('active');
+  document.getElementById('topbarTitle').textContent = pageTitles[id]||id;
+  if(id==='dashboard') loadDashboard();
+  if(id==='inquiries') renderInquiries();
+  if(id==='jobs') renderJobs();
+  if(id==='services') renderServices();
+  if(id==='settings') loadSettings();
+  if(id==='database') loadDbInfo();
+}
+
+function loadAll(){
+  document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  loadDashboard();
+}
+
+// ═══════════════════════════════════════════════════════
+//  DASHBOARD
+// ═══════════════════════════════════════════════════════
+function loadDashboard(){
+  const inqs = DB.getInquiries();
+  const jobs = DB.getJobs();
+  const svcs = DB.getServices();
+
+  const statMap = {new:0,in_progress:0,resolved:0,spam:0};
+  inqs.forEach(i=>{ if(statMap[i.status]!==undefined) statMap[i.status]++; });
+
+  document.getElementById('s-total').textContent = inqs.length;
+  document.getElementById('s-new').textContent = statMap.new;
+  document.getElementById('s-jobs').textContent = jobs.filter(j=>j.active).length;
+  document.getElementById('s-services').textContent = svcs.filter(s=>s.active).length;
+  document.getElementById('d-inprog').textContent = statMap.in_progress;
+  document.getElementById('d-resolved').textContent = statMap.resolved;
+  document.getElementById('d-spam').textContent = statMap.spam;
+  document.getElementById('newInqBadge').textContent = statMap.new;
+
+  // Recent inquiries
+  const tBody = document.getElementById('recentInqTable');
+  const recent = [...inqs].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
+  if(!recent.length){
+    tBody.innerHTML='<tr><td colspan="4" class="empty-state"><i class="fas fa-inbox"></i>No inquiries yet</td></tr>';
+  } else {
+    tBody.innerHTML = recent.map(i=>`
+      <tr>
+        <td><b>${escHtml(i.name)}</b></td>
+        <td style="color:var(--muted);font-size:0.8rem;">${escHtml(i.service||'—')}</td>
+        <td><span class="badge ${i.status}">${fmtStatus(i.status)}</span></td>
+        <td style="color:var(--muted);font-size:0.78rem;">${fmtDate(i.date)}</td>
+      </tr>`).join('');
+  }
+
+  // Trend chart — last 7 days
+  const days=[];
+  const counts=[];
+  for(let d=6;d>=0;d--){
+    const dt = new Date(); dt.setDate(dt.getDate()-d);
+    const key = dt.toISOString().split('T')[0];
+    days.push(dt.toLocaleDateString('en-IN',{weekday:'short'}));
+    counts.push(inqs.filter(i=>i.date&&i.date.startsWith(key)).length);
+  }
+  const max = Math.max(...counts,1);
+  document.getElementById('trendChart').innerHTML = counts.map(c=>`<div class="bar" style="height:${Math.max(4,Math.round((c/max)*52))}px" title="${c} inquiry(s)"></div>`).join('');
+  document.getElementById('trendLabels').innerHTML = days.map(d=>`<div class="chart-label">${d}</div>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+//  INQUIRIES
+// ═══════════════════════════════════════════════════════
+let inqFilter='all', currentInqRef=null;
+
+function filterInquiries(status, btn){
+  inqFilter=status;
+  document.querySelectorAll('#page-inquiries .filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderInquiries();
+}
+
+function renderInquiries(){
+  const inqs = DB.getInquiries();
+  const search = (document.getElementById('inqSearch')||{}).value?.toLowerCase()||'';
+  let filtered = inqs.filter(i=>{
+    if(inqFilter!=='all' && i.status!==inqFilter) return false;
+    if(search && !((i.name||'').toLowerCase().includes(search)||(i.email||'').toLowerCase().includes(search)||(i.ref||'').toLowerCase().includes(search))) return false;
+    return true;
+  }).sort((a,b)=>new Date(b.date)-new Date(a.date));
+
+  const tbody = document.getElementById('inqTable');
+  if(!filtered.length){
+    tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state"><i class="fas fa-inbox"></i>No inquiries found</div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = filtered.map(i=>`
+    <tr>
+      <td style="font-weight:700;color:var(--accent);font-size:0.78rem;">${escHtml(i.ref||'—')}</td>
+      <td>${escHtml(i.name)}</td>
+      <td style="color:var(--muted);font-size:0.82rem;">${escHtml(i.email)}</td>
+      <td style="font-size:0.82rem;">${escHtml(i.service||'—')}</td>
+      <td><span class="badge ${i.status}">${fmtStatus(i.status)}</span></td>
+      <td style="color:var(--muted);font-size:0.78rem;">${fmtDate(i.date)}</td>
+      <td>
+        <button class="btn btn-ghost btn-sm" onclick="viewInquiry('${escHtml(i.ref)}')"><i class="fas fa-eye"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="deleteInquiry('${escHtml(i.ref)}')"><i class="fas fa-trash"></i></button>
+      </td>
+    </tr>`).join('');
+}
+
+function viewInquiry(ref){
+  const inqs = DB.getInquiries();
+  const i = inqs.find(x=>x.ref===ref); if(!i) return;
+  currentInqRef=ref;
+  document.getElementById('inqDetailGrid').innerHTML=`
+    <div class="detail-item"><div class="label">Reference</div><div class="value" style="color:var(--accent);">${escHtml(i.ref)}</div></div>
+    <div class="detail-item"><div class="label">Status</div><div class="value"><span class="badge ${i.status}">${fmtStatus(i.status)}</span></div></div>
+    <div class="detail-item"><div class="label">Full Name</div><div class="value">${escHtml(i.name)}</div></div>
+    <div class="detail-item"><div class="label">Email</div><div class="value">${escHtml(i.email)}</div></div>
+    <div class="detail-item"><div class="label">Phone</div><div class="value">${escHtml(i.phone||'Not provided')}</div></div>
+    <div class="detail-item"><div class="label">Service Interest</div><div class="value">${escHtml(i.service||'General Inquiry')}</div></div>
+    <div class="detail-item"><div class="label">Submitted</div><div class="value">${fmtDateFull(i.date)}</div></div>`;
+  document.getElementById('inqDetailMsg').innerHTML=`<div class="label">Message</div><div class="value">${escHtml(i.message)}</div>`;
+  openModal('inqModal');
+}
+
+function updateInqStatus(status){
+  const inqs = DB.getInquiries();
+  const idx = inqs.findIndex(x=>x.ref===currentInqRef);
+  if(idx<0) return;
+  inqs[idx].status=status;
+  DB.saveInquiries(inqs);
+  closeModal('inqModal');
+  renderInquiries();
+  loadDashboard();
+  toast('success','Status Updated',`Inquiry marked as "${fmtStatus(status)}".`);
+}
+
+function deleteInquiry(ref){
+  if(!confirm('Delete this inquiry permanently?')) return;
+  const inqs = DB.getInquiries().filter(x=>x.ref!==ref);
+  DB.saveInquiries(inqs);
+  renderInquiries();
+  loadDashboard();
+  toast('success','Deleted','Inquiry removed.');
+}
+
+// ═══════════════════════════════════════════════════════
+//  JOBS
+// ═══════════════════════════════════════════════════════
+function renderJobs(){
+  const jobs = DB.getJobs().sort((a,b)=>b.id-a.id);
+  const tbody = document.getElementById('jobsTable');
+  if(!jobs.length){
+    tbody.innerHTML=`<tr><td colspan="7"><div class="empty-state"><i class="fas fa-briefcase"></i>No jobs added</div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = jobs.map(j=>`
+    <tr>
+      <td><b>${escHtml(j.title)}</b></td>
+      <td style="font-size:0.82rem;">${escHtml(j.type)}</td>
+      <td style="font-size:0.82rem;color:var(--muted);">${escHtml(j.experience||'—')}</td>
+      <td style="font-size:0.82rem;">${escHtml(j.location||'Pune')}</td>
+      <td><span class="badge ${j.active?'active':'inactive'}">${j.active?'Active':'Inactive'}</span></td>
+      <td style="font-size:0.78rem;color:var(--muted);">${j.posted||'—'}</td>
+      <td>
+        <button class="btn btn-ghost btn-sm" onclick="editJob(${j.id})"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="deleteJob(${j.id})"><i class="fas fa-trash"></i></button>
+      </td>
+    </tr>`).join('');
+}
+
+function openJobModal(id){
+  document.getElementById('jobId').value='';
+  document.getElementById('jobModalTitle').innerHTML='<i class="fas fa-briefcase" style="color:var(--accent);margin-right:8px;"></i> Add Job Opening';
+  document.getElementById('j-title').value='';
+  document.getElementById('j-type').value='Full-Time';
+  document.getElementById('j-location').value='Pune';
+  document.getElementById('j-exp').value='';
+  document.getElementById('j-qual').value='';
+  document.getElementById('j-desc').value='';
+  document.getElementById('j-posted').value=new Date().toISOString().split('T')[0];
+  document.getElementById('j-expires').value='';
+  document.getElementById('j-active').checked=true;
+  openModal('jobModal');
+}
+
+function editJob(id){
+  const j = DB.getJobs().find(x=>x.id===id); if(!j) return;
+  document.getElementById('jobId').value=j.id;
+  document.getElementById('jobModalTitle').innerHTML='<i class="fas fa-briefcase" style="color:var(--accent);margin-right:8px;"></i> Edit Job Opening';
+  document.getElementById('j-title').value=j.title||'';
+  document.getElementById('j-type').value=j.type||'Full-Time';
+  document.getElementById('j-location').value=j.location||'Pune';
+  document.getElementById('j-exp').value=j.experience||'';
+  document.getElementById('j-qual').value=j.qualification||'';
+  document.getElementById('j-desc').value=j.description||'';
+  document.getElementById('j-posted').value=j.posted||'';
+  document.getElementById('j-expires').value=j.expires||'';
+  document.getElementById('j-active').checked=!!j.active;
+  openModal('jobModal');
+}
+
+function saveJob(){
+  const title = document.getElementById('j-title').value.trim();
+  if(!title){ toast('error','Error','Job title is required.'); return; }
+  const jobs = DB.getJobs();
+  const existing = document.getElementById('jobId').value;
+  const job = {
+    id: existing ? parseInt(existing) : DB.nextJobId(),
+    title,
+    type: document.getElementById('j-type').value,
+    experience: document.getElementById('j-exp').value.trim(),
+    qualification: document.getElementById('j-qual').value.trim(),
+    location: document.getElementById('j-location').value.trim()||'Pune',
+    description: document.getElementById('j-desc').value.trim(),
+    posted: document.getElementById('j-posted').value||new Date().toISOString().split('T')[0],
+    expires: document.getElementById('j-expires').value||null,
+    active: document.getElementById('j-active').checked
+  };
+  if(existing){ const idx=jobs.findIndex(x=>x.id===parseInt(existing)); if(idx>=0) jobs[idx]=job; else jobs.push(job); }
+  else jobs.push(job);
+  DB.saveJobs(jobs);
+  closeModal('jobModal');
+  renderJobs();
+  loadDashboard();
+  toast('success','Saved',existing?'Job updated successfully.':'New job opening created.');
+}
+
+function deleteJob(id){
+  if(!confirm('Delete this job posting?')) return;
+  DB.saveJobs(DB.getJobs().filter(x=>x.id!==id));
+  renderJobs(); loadDashboard();
+  toast('success','Deleted','Job removed.');
+}
+
+// ═══════════════════════════════════════════════════════
+//  SERVICES
+// ═══════════════════════════════════════════════════════
+function renderServices(){
+  const svcs = DB.getServices();
+  const tbody = document.getElementById('servicesTable');
+  if(!svcs.length){
+    tbody.innerHTML=`<tr><td colspan="4"><div class="empty-state"><i class="fas fa-flask"></i>No services added</div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = svcs.map(s=>`
+    <tr>
+      <td><b>${escHtml(s.name)}</b>${s.description?`<br><span style="font-size:0.78rem;color:var(--muted);">${escHtml(s.description)}</span>`:''}</td>
+      <td style="font-size:0.82rem;">${escHtml(s.category)}</td>
+      <td><span class="badge ${s.active?'active':'inactive'}">${s.active?'Active':'Inactive'}</span></td>
+      <td>
+        <button class="btn btn-ghost btn-sm" onclick="editService(${s.id})"><i class="fas fa-edit"></i></button>
+        <button class="btn btn-danger btn-sm" onclick="deleteService(${s.id})"><i class="fas fa-trash"></i></button>
+      </td>
+    </tr>`).join('');
+}
+
+function openServiceModal(){
+  document.getElementById('svcId').value='';
+  document.getElementById('svcModalTitle').innerHTML='<i class="fas fa-flask" style="color:var(--accent);margin-right:8px;"></i> Add Service';
+  document.getElementById('sv-name').value='';
+  document.getElementById('sv-cat').value='Environmental Analysis';
+  document.getElementById('sv-desc').value='';
+  document.getElementById('sv-active').checked=true;
+  openModal('svcModal');
+}
+
+function editService(id){
+  const s = DB.getServices().find(x=>x.id===id); if(!s) return;
+  document.getElementById('svcId').value=s.id;
+  document.getElementById('svcModalTitle').innerHTML='<i class="fas fa-flask" style="color:var(--accent);margin-right:8px;"></i> Edit Service';
+  document.getElementById('sv-name').value=s.name||'';
+  document.getElementById('sv-cat').value=s.category||'Environmental Analysis';
+  document.getElementById('sv-desc').value=s.description||'';
+  document.getElementById('sv-active').checked=!!s.active;
+  openModal('svcModal');
+}
+
+function saveService(){
+  const name = document.getElementById('sv-name').value.trim();
+  if(!name){ toast('error','Error','Service name is required.'); return; }
+  const svcs = DB.getServices();
+  const existing = document.getElementById('svcId').value;
+  const svc = {
+    id: existing ? parseInt(existing) : DB.nextSvcId(),
+    name,
+    category: document.getElementById('sv-cat').value,
+    description: document.getElementById('sv-desc').value.trim(),
+    active: document.getElementById('sv-active').checked
+  };
+  if(existing){ const idx=svcs.findIndex(x=>x.id===parseInt(existing)); if(idx>=0) svcs[idx]=svc; else svcs.push(svc); }
+  else svcs.push(svc);
+  DB.saveServices(svcs);
+  closeModal('svcModal');
+  renderServices();
+  toast('success','Saved',existing?'Service updated.':'New service added.');
+}
+
+function deleteService(id){
+  if(!confirm('Delete this service?')) return;
+  DB.saveServices(DB.getServices().filter(x=>x.id!==id));
+  renderServices();
+  toast('success','Deleted','Service removed.');
+}
+
+// ═══════════════════════════════════════════════════════
+//  SETTINGS
+// ═══════════════════════════════════════════════════════
+function loadSettings(){
+  const s = DB.getSettings();
+  document.getElementById('set-name').value=s.name||'';
+  document.getElementById('set-phone').value=s.phone||'';
+  document.getElementById('set-email').value=s.email||'';
+  document.getElementById('set-addr1').value=s.addr1||'';
+  document.getElementById('set-addr2').value=s.addr2||'';
+  document.getElementById('set-hours').value=s.hours||'';
+}
+
+function saveSettings(){
+  const s = DB.getSettings();
+  s.name  = document.getElementById('set-name').value.trim();
+  s.phone = document.getElementById('set-phone').value.trim();
+  s.email = document.getElementById('set-email').value.trim();
+  s.addr1 = document.getElementById('set-addr1').value.trim();
+  s.addr2 = document.getElementById('set-addr2').value.trim();
+  s.hours = document.getElementById('set-hours').value.trim();
+  DB.saveSettings(s);
+
+  // Password change
+  const curpw = document.getElementById('set-curpw').value;
+  const newpw = document.getElementById('set-newpw').value;
+  const confpw = document.getElementById('set-confpw').value;
+  if(curpw||newpw||confpw){
+    const admin = DB.getAdmin();
+    if(curpw !== admin.password){ toast('error','Error','Current password is incorrect.'); return; }
+    if(newpw.length < 6){ toast('error','Error','New password must be at least 6 characters.'); return; }
+    if(newpw !== confpw){ toast('error','Error','Passwords do not match.'); return; }
+    admin.password = newpw;
+    DB.saveAdmin(admin);
+    document.getElementById('set-curpw').value='';
+    document.getElementById('set-newpw').value='';
+    document.getElementById('set-confpw').value='';
+  }
+
+  toast('success','Saved','Settings updated successfully.');
+}
+
+// ═══════════════════════════════════════════════════════
+//  DATABASE PAGE
+// ═══════════════════════════════════════════════════════
+function loadDbInfo(){
+  const inqs = DB.getInquiries();
+  const jobs = DB.getJobs();
+  const svcs = DB.getServices();
+  let used = 0;
+  for(let k in localStorage){ try{ used += localStorage[k].length * 2; }catch(e){} }
+  document.getElementById('dbInfo').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+      <div style="background:var(--surface);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--accent);">${inqs.length}</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">Inquiries stored</div>
+      </div>
+      <div style="background:var(--surface);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--blue);">${jobs.length}</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">Job postings</div>
+      </div>
+      <div style="background:var(--surface);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:1.8rem;font-weight:800;color:var(--warn);">${svcs.length}</div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-top:4px;">Services</div>
+      </div>
+    </div>
+    <p style="font-size:0.82rem;color:var(--muted);margin-top:16px;text-align:center;">
+      <i class="fas fa-hdd"></i> Approximate storage used: <b>${(used/1024).toFixed(1)} KB</b> &nbsp;|&nbsp;
+      Data is stored in your browser's localStorage
+    </p>`;
+}
+
+function exportData(){
+  const data = {
+    exported: new Date().toISOString(),
+    settings: DB.getSettings(),
+    inquiries: DB.getInquiries(),
+    jobs: DB.getJobs(),
+    services: DB.getServices()
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='akanksha_data_'+new Date().toISOString().split('T')[0]+'.json';
+  a.click();
+  toast('success','Exported','Data downloaded as JSON file.');
+}
+
+function resetData(){
+  if(!confirm('This will DELETE all inquiries and reset jobs/services to demo data. Are you sure?')) return;
+  localStorage.removeItem(DB.INQ_KEY);
+  localStorage.removeItem(DB.JOBS_KEY);
+  localStorage.removeItem(DB.SVC_KEY);
+  loadDbInfo();
+  loadDashboard();
+  toast('success','Reset','Database reset to demo data.');
+}
+
+// ═══════════════════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════════════════
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+function toast(type,title,sub){
+  const t=document.getElementById('toast');
+  t.className='toast '+type;
+  document.getElementById('toastTitle').textContent=title;
+  document.getElementById('toastSub').textContent=sub;
+  document.getElementById('toastIcon').innerHTML=type==='success'?'<i class="fas fa-check"></i>':'<i class="fas fa-exclamation-triangle"></i>';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),4000);
+}
+
+function escHtml(str){
+  if(!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fmtStatus(s){
+  const m={new:'New',in_progress:'In Progress',resolved:'Resolved',spam:'Spam'};
+  return m[s]||s;
+}
+
+function fmtDate(iso){
+  if(!iso) return '—';
+  try{ return new Date(iso).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}); }catch(e){ return iso; }
+}
+function fmtDateFull(iso){
+  if(!iso) return '—';
+  try{ return new Date(iso).toLocaleString('en-IN',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){ return iso; }
+}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); });
+});
+</script>
+</body>
+</html>
