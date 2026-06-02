@@ -1,0 +1,3993 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Akanksha Analytical | Precision & Compliance</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      :root {
+        --primary: #0f172a;
+        --accent: #10b981;
+        --accent-glow: rgba(16, 185, 129, 0.35);
+        --accent-glow2: rgba(16, 185, 129, 0.15);
+        --secondary: #3b82f6;
+        --secondary-glow: rgba(59, 130, 246, 0.3);
+        --surface: #fff;
+        --glass: rgba(255, 255, 255, 0.92);
+        --card-shadow: 0 20px 40px rgba(15, 23, 42, 0.07);
+        --grad: linear-gradient(135deg, #f0fdf4 0%, #eff6ff 100%);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #f8fafc;
+        overflow-x: hidden;
+        color: #1e293b;
+        line-height: 1.6;
+      }
+
+      /* ══════════════════════════════════
+         TOP INFO BAR — FULLY RESPONSIVE
+      ══════════════════════════════════ */
+      .top-bar {
+        background: linear-gradient(90deg, #0f172a 0%, #1e3a5f 100%);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        height: 40px;
+        position: relative;
+        z-index: 1001;
+      }
+      .top-bar-left {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .top-bar-left span {
+        color: var(--accent);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .top-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-shrink: 0;
+      }
+      .top-bar-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.85);
+        transition: color 0.3s;
+        white-space: nowrap;
+        font-size: 0.75rem;
+      }
+      .top-bar-item:hover {
+        color: var(--accent);
+      }
+      .top-bar-item i {
+        color: var(--accent);
+        font-size: 0.72rem;
+        width: 16px;
+        text-align: center;
+      }
+      .top-bar-divider {
+        width: 1px;
+        height: 18px;
+        background: rgba(255, 255, 255, 0.15);
+        flex-shrink: 0;
+      }
+
+      /* ── TABLET (769px – 1024px) ── */
+      @media (max-width: 1024px) and (min-width: 769px) {
+        .top-bar {
+          padding: 0 3%;
+          height: 40px;
+        }
+        .top-bar-left {
+          display: none;
+        }
+        .top-bar-right {
+          gap: 14px;
+          width: 100%;
+          justify-content: center;
+        }
+        .top-bar-item {
+          font-size: 0.72rem;
+        }
+      }
+
+      /* ── MOBILE (≤ 768px) ── */
+      @media (max-width: 768px) {
+        .top-bar {
+          height: auto;
+          padding: 6px 4%;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+        }
+        .top-bar-left {
+          display: none;
+        }
+        .top-bar-right {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0;
+          width: 100%;
+        }
+        /* hide both dividers on mobile */
+        .top-bar-divider {
+          display: none;
+        }
+        .top-bar-item {
+          font-size: 0.71rem;
+          padding: 5px 6px;
+          gap: 5px;
+          justify-content: flex-start;
+          border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        /* email spans full width (3rd item) */
+        .top-bar-item:nth-child(5) {
+          grid-column: 1 / -1;
+          justify-content: center;
+          border-bottom: none;
+        }
+        /* remove bottom border from last two phone items in last grid row */
+        .top-bar-item:nth-child(1),
+        .top-bar-item:nth-child(3) {
+          border-right: 1px solid rgba(255,255,255,0.08);
+        }
+        .top-bar-item i {
+          font-size: 0.7rem;
+          width: 14px;
+        }
+      }
+
+      /* ── VERY SMALL (≤ 400px) ── */
+      @media (max-width: 400px) {
+        .top-bar-right {
+          grid-template-columns: 1fr;
+        }
+        .top-bar-item {
+          justify-content: center;
+          border-right: none !important;
+        }
+        .top-bar-item:nth-child(5) {
+          grid-column: auto;
+          border-bottom: none;
+        }
+      }
+
+      /* ══════════════════════════════════
+         NAVBAR
+      ══════════════════════════════════ */
+      nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        padding: 0 5%;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        border-bottom: 1px solid rgba(16, 185, 129, 0.12);
+        box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
+        transition: all 0.4s;
+        height: 66px;
+        min-width: 0;
+      }
+      nav.scrolled {
+        box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1);
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      .logo-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        flex-shrink: 0;
+      }
+      .logo-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .logo:hover .logo-icon {
+        transform: rotate(5deg) scale(1.08);
+      }
+      .logo-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+      }
+      .logo-text b {
+        color: var(--primary);
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: -0.3px;
+        white-space: nowrap;
+      }
+      .logo-text span {
+        color: var(--accent);
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+      .nav-links {
+        display: flex;
+        gap: 0;
+        list-style: none;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-shrink: 1;
+        min-width: 0;
+      }
+      .nav-links li {
+        position: relative;
+        flex-shrink: 0;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #475569;
+        font-weight: 600;
+        font-size: 0.62rem;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 0px;
+        padding: 6px 5px;
+        border-radius: 10px;
+        display: block;
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+      .nav-links a.active {
+        color: var(--accent);
+      }
+      .nav-cta {
+        background: linear-gradient(135deg, var(--accent), #059669) !important;
+        color: #fff !important;
+        padding: 7px 12px !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3) !important;
+        margin-left: 4px;
+        flex-shrink: 0;
+        white-space: nowrap;
+      }
+      .nav-cta:hover {
+        background: linear-gradient(135deg, #059669, var(--accent)) !important;
+        transform: translateY(-2px);
+        color: #fff !important;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 10px;
+        transition: background 0.3s;
+      }
+      .hamburger:hover {
+        background: rgba(16, 185, 129, 0.1);
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--primary);
+        border-radius: 2px;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 106px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 88%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 20px;
+        z-index: 999;
+        border: 1px solid rgba(16, 185, 129, 0.15);
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.12);
+        flex-direction: column;
+        gap: 4px;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        text-decoration: none;
+        color: var(--primary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        padding: 12px 16px;
+        border-radius: 12px;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .mobile-menu a:hover {
+        background: rgba(16, 185, 129, 0.08);
+        color: var(--accent);
+      }
+
+      /* ══════════════════════════════════
+         SHARED UTILITIES
+      ══════════════════════════════════ */
+      .text-gradient {
+        background: linear-gradient(
+          90deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+      }
+      .text-gradient-green {
+        background: linear-gradient(90deg, var(--accent), #059669);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+      }
+      section {
+        padding: 100px 5%;
+      }
+      .section-title1 {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .section-title1 h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 12px;
+      }
+      .section-title1 h2::after {
+        content: "";
+        display: block;
+        width: 56px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--secondary));
+        margin: 14px auto 0;
+        border-radius: 2px;
+      }
+      .section-title1 p {
+        color: #64748b;
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 1.02rem;
+      }
+      .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 100px;
+        padding: 6px 16px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, var(--accent), #059669);
+        color: #fff;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        z-index: 900;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        border: none;
+        font-size: 1rem;
+      }
+      .scroll-top.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .scroll-top:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px var(--accent-glow);
+      }
+
+      /* ══════════════════════════════════
+         HERO — WHITE THEME + BUILDING PHOTO
+      ══════════════════════════════════ */
+      .hero {
+        min-height: calc(100vh - 106px);
+        display: flex;
+        align-items: center;
+        padding: 60px 5% 60px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          #f0fdf9 0%,
+          #eff6ff 60%,
+          #f0fdf4 100%
+        );
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+      }
+      .hero-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+        animation: orbFloat 8s ease-in-out infinite;
+      }
+      .hero-orb-1 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(16, 185, 129, 0.18),
+          transparent 70%
+        );
+        top: -150px;
+        left: -100px;
+        animation-delay: 0s;
+      }
+      .hero-orb-2 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.12),
+          transparent 70%
+        );
+        bottom: -100px;
+        right: 30%;
+        animation-delay: -4s;
+      }
+      @keyframes orbFloat {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(20px, -25px);
+        }
+      }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+      }
+      .hero-content {
+        max-width: 620px;
+      }
+      .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        border-radius: 100px;
+        padding: 6px 18px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+        animation: slideInUp 0.8s ease both;
+      }
+      .hero-label .pulse {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: pulse 2s ease infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.6);
+          opacity: 0.4;
+        }
+      }
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .hero-content h1 {
+        font-size: 3.8rem;
+        line-height: 1.08;
+        margin-bottom: 20px;
+        font-weight: 800;
+        letter-spacing: -1.5px;
+        color: var(--primary);
+        animation: slideInUp 0.8s 0.2s ease both;
+      }
+      .hero-content p {
+        font-size: 1.08rem;
+        color: #475569;
+        margin-bottom: 32px;
+        max-width: 540px;
+        line-height: 1.78;
+        animation: slideInUp 0.8s 0.4s ease both;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        animation: slideInUp 0.8s 0.6s ease both;
+      }
+      .hero-stat-row {
+        display: flex;
+        gap: 18px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+        animation: slideInUp 0.8s 0.8s ease both;
+      }
+      .hero-stat-chip {
+        background: #fff;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 14px;
+        padding: 14px 20px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.4s;
+      }
+      .hero-stat-chip:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(16, 185, 129, 0.12);
+        border-color: var(--accent);
+      }
+      .hero-stat-chip .chip-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+      .hero-stat-chip:nth-child(2) .chip-icon {
+        background: rgba(59, 130, 246, 0.1);
+        color: var(--secondary);
+      }
+      .hero-stat-chip:nth-child(3) .chip-icon {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--accent);
+      }
+      .chip-num {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1;
+      }
+      .chip-label {
+        font-size: 0.7rem;
+        color: #64748b;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        margin-top: 2px;
+      }
+
+      /* Building photo */
+      .hero-building {
+        position: relative;
+        animation: slideInUp 0.8s 0.5s ease both;
+      }
+      .hero-building-frame {
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow:
+          0 40px 90px rgba(15, 23, 42, 0.15),
+          0 0 0 6px #fff;
+        position: relative;
+        aspect-ratio: 4/3;
+        max-height: 480px;
+      }
+      .hero-building-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s ease;
+      }
+      .hero-building-frame:hover img {
+        transform: scale(1.03);
+      }
+      .hero-building-badge {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(12px);
+        border-radius: 16px;
+        padding: 14px 18px;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .hero-building-badge-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--accent), #059669);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+      .hero-building-badge-text strong {
+        display: block;
+        font-size: 0.82rem;
+        color: var(--primary);
+        font-weight: 800;
+      }
+      .hero-building-badge-text span {
+        font-size: 0.72rem;
+        color: #64748b;
+      }
+      .hero-deco-dot {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--secondary));
+        opacity: 0.15;
+        pointer-events: none;
+      }
+      .hero-deco-dot-1 {
+        width: 120px;
+        height: 120px;
+        top: -30px;
+        right: -30px;
+      }
+      .hero-deco-dot-2 {
+        width: 60px;
+        height: 60px;
+        bottom: -20px;
+        left: -20px;
+        background: var(--secondary);
+      }
+
+      /* ══════════════════════════════════
+         ACCREDITATIONS — WHITE
+      ══════════════════════════════════ */
+      .accreditations-container {
+        width: 100%;
+        padding: 56px 5% 48px;
+        background: #fff;
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .section-title-center {
+        font-size: 2rem;
+        color: var(--primary);
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 28px;
+        position: relative;
+        padding-bottom: 16px;
+      }
+      .section-title-center::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--secondary));
+        border-radius: 2px;
+      }
+      .badge-strip {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        padding: 28px 36px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #f0fdf9, #eff6ff);
+        border: 1px solid rgba(16, 185, 129, 0.12);
+      }
+      .badge {
+        background: #fff;
+        padding: 14px 22px;
+        border-radius: 14px;
+        font-weight: 700;
+        font-size: 0.82rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid rgba(16, 185, 129, 0.15);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: pointer;
+        color: #475569;
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      }
+      .badge i {
+        color: var(--accent);
+      }
+      .badge:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.06),
+          rgba(59, 130, 246, 0.04)
+        );
+        color: var(--primary);
+        border-color: var(--accent);
+        transform: translateY(-5px);
+        box-shadow: 0 16px 36px rgba(16, 185, 129, 0.12);
+      }
+
+      /* ══════════════════════════════════
+         ABOUT — WHITE
+      ══════════════════════════════════ */
+      .about-section {
+        background: linear-gradient(135deg, #f0fdf9 0%, #eff6ff 100%);
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 70px;
+        align-items: center;
+      }
+      .about-text h3 {
+        color: var(--accent);
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 2.5px;
+        margin-bottom: 14px;
+        font-weight: 700;
+      }
+      .about-text h2 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+      .about-text p {
+        margin-bottom: 18px;
+        font-size: 1.02rem;
+        color: #475569;
+      }
+      .vision-mission {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-top: 32px;
+      }
+      .vm-card {
+        background: #fff;
+        padding: 26px;
+        border-radius: 20px;
+        border-left: 4px solid var(--accent);
+        box-shadow: var(--card-shadow);
+        transition: all 0.4s;
+      }
+      .vm-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 30px 50px rgba(15, 23, 42, 0.1);
+      }
+      .vm-card h4 {
+        margin-bottom: 10px;
+        color: var(--primary);
+        font-size: 1.05rem;
+      }
+      .vm-card p {
+        font-size: 0.87rem;
+        color: #64748b;
+        margin: 0;
+      }
+      .about-img {
+        position: relative;
+      }
+      .about-img .img-wrap {
+        background: #fff;
+        height: 420px;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(15, 23, 42, 0.12);
+        border: 6px solid #fff;
+        animation: float 7s ease-in-out infinite;
+      }
+      .about-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .about-deco {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        border-radius: 24px;
+        background: linear-gradient(135deg, var(--accent), var(--secondary));
+        bottom: -20px;
+        right: -20px;
+        z-index: -1;
+        opacity: 0.12;
+      }
+      .about-deco-2 {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--accent);
+        top: -15px;
+        left: -15px;
+        z-index: -1;
+        opacity: 0.08;
+        animation: pulse 4s ease infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-18px);
+        }
+      }
+
+      /* ══════════════════════════════════
+         WHY CHOOSE US — LIGHT GREEN/BLUE
+      ══════════════════════════════════ */
+      .why-section {
+        background: linear-gradient(
+          135deg,
+          #f8fafc 0%,
+          #f0fdf9 50%,
+          #eff6ff 100%
+        );
+      }
+      .why-choose-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 22px;
+        margin-top: 40px;
+      }
+      .choose-card {
+        background: #fff;
+        padding: 32px 28px;
+        border-radius: 24px;
+        border: 1px solid rgba(16, 185, 129, 0.12);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: default;
+        box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+      }
+      .choose-card::before {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.06);
+        transition: all 0.6s;
+        z-index: 0;
+      }
+      .choose-card:hover::before {
+        transform: scale(3.5);
+      }
+      .choose-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(16, 185, 129, 0.3);
+        box-shadow: 0 30px 60px rgba(16, 185, 129, 0.1);
+      }
+      .choose-card h4 {
+        margin-bottom: 10px;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.98rem;
+        position: relative;
+        z-index: 1;
+      }
+      .choose-card i {
+        color: var(--accent);
+        font-size: 1.1rem;
+      }
+      .choose-card p {
+        font-size: 0.88rem;
+        color: #64748b;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+      }
+      .choose-icon-wrap {
+        width: 48px;
+        height: 48px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+        transition: all 0.4s;
+        position: relative;
+        z-index: 1;
+      }
+      .choose-card:hover .choose-icon-wrap {
+        background: linear-gradient(135deg, var(--accent), #059669);
+        border-color: var(--accent);
+        transform: rotate(10deg) scale(1.1);
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+      }
+      .choose-card:hover .choose-icon-wrap i {
+        color: #fff;
+      }
+
+      /* ══════════════════════════════════
+         DIRECTORS — WHITE
+      ══════════════════════════════════ */
+      .directors-section {
+        padding: 110px 5%;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+      .directors-section::before {
+        content: "";
+        position: absolute;
+        top: -150px;
+        right: -150px;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(16, 185, 129, 0.04),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .directors-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        margin-top: 60px;
+      }
+      .director-card {
+        background: #fff;
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+      }
+      .director-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 40px 90px rgba(16, 185, 129, 0.12);
+        border-color: rgba(16, 185, 129, 0.25);
+      }
+      .director-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--secondary));
+      }
+      .director-img-wrap {
+        overflow: hidden;
+        position: relative;
+        background: #f1f5f9;
+      }
+      .director-img-wrap img {
+        width: 100%;
+        height: auto;
+        display: block;
+        max-height: 500px;
+        object-fit: contain;
+        object-position: center top;
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .director-card:hover .director-img-wrap img {
+        transform: scale(1.03);
+      }
+      .director-img-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to top, #fff, transparent);
+      }
+      .director-info {
+        padding: 32px 36px 36px;
+      }
+      .director-role-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 100px;
+        padding: 5px 16px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+      }
+      .director-name {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
+      }
+      .director-title {
+        font-size: 0.85rem;
+        color: #64748b;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      .director-bio {
+        font-size: 0.9rem;
+        color: #475569;
+        line-height: 1.8;
+        margin-bottom: 20px;
+      }
+      .director-bio-full {
+        display: none;
+      }
+      .director-bio-full.expanded {
+        display: block;
+      }
+      .read-more-btn {
+        background: none;
+        border: none;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.85rem;
+        cursor: pointer;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: gap 0.3s;
+      }
+      .read-more-btn:hover {
+        gap: 10px;
+      }
+      .director-quals {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .director-qual {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 5px 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #475569;
+      }
+
+      /* ══════════════════════════════════
+         SERVICES — LIGHT GRADIENT
+      ══════════════════════════════════ */
+      .services-wrapper {
+        padding: 110px 5%;
+        background: linear-gradient(
+          135deg,
+          #f0fdf9 0%,
+          #eff6ff 60%,
+          #f0fdf4 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .services-wrapper::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+        animation: gridMove 25s linear infinite;
+      }
+      @keyframes gridMove {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(50px, 50px);
+        }
+      }
+      .services-header {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+        z-index: 2;
+      }
+      .services-header h2 {
+        font-size: 2.6rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 14px;
+      }
+      .services-header h2::after {
+        content: "";
+        display: block;
+        width: 56px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--secondary));
+        margin: 14px auto 0;
+        border-radius: 2px;
+      }
+      .services-header p {
+        color: #64748b;
+        font-size: 1.02rem;
+      }
+      .services-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+      .service-card {
+        background: #fff;
+        border: 1px solid rgba(16, 185, 129, 0.12);
+        border-radius: 28px;
+        padding: 48px 44px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: default;
+        box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
+      }
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), #059669);
+        transform: scaleX(0);
+        transition: transform 0.6s ease;
+        transform-origin: left;
+      }
+      .service-card.compliance::before {
+        background: linear-gradient(90deg, var(--secondary), #2563eb);
+      }
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+      .service-card::after {
+        content: "";
+        position: absolute;
+        bottom: -80px;
+        right: -80px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(16, 185, 129, 0.07),
+          transparent 70%
+        );
+        transition: all 0.6s;
+        pointer-events: none;
+      }
+      .service-card.compliance::after {
+        background: radial-gradient(
+          circle,
+          rgba(59, 130, 246, 0.07),
+          transparent 70%
+        );
+      }
+      .service-card:hover::after {
+        transform: scale(2.5);
+      }
+      .service-card:hover {
+        transform: translateY(-10px);
+        border-color: rgba(16, 185, 129, 0.3);
+        box-shadow: 0 40px 80px rgba(16, 185, 129, 0.1);
+      }
+      .service-card.compliance:hover {
+        border-color: rgba(59, 130, 246, 0.3);
+        box-shadow: 0 40px 80px rgba(59, 130, 246, 0.1);
+      }
+      .service-card-header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 32px;
+        position: relative;
+        z-index: 1;
+      }
+      .service-icon-box {
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.12),
+          rgba(16, 185, 129, 0.04)
+        );
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--accent);
+        flex-shrink: 0;
+        transition: all 0.4s;
+      }
+      .service-card.compliance .service-icon-box {
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.12),
+          rgba(59, 130, 246, 0.04)
+        );
+        border-color: rgba(59, 130, 246, 0.2);
+        color: var(--secondary);
+      }
+      .service-card:hover .service-icon-box {
+        transform: rotate(-8deg) scale(1.12);
+        background: linear-gradient(135deg, var(--accent), #059669);
+        border-color: var(--accent);
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(16, 185, 129, 0.3);
+      }
+      .service-card.compliance:hover .service-icon-box {
+        background: linear-gradient(135deg, var(--secondary), #2563eb);
+        border-color: var(--secondary);
+        box-shadow: 0 12px 30px rgba(59, 130, 246, 0.3);
+      }
+      .service-card-header h3 {
+        font-size: 1.3rem;
+        color: var(--primary);
+        font-weight: 800;
+        letter-spacing: -0.3px;
+        line-height: 1.2;
+      }
+      .service-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+      }
+      .service-list li {
+        padding: 11px 0 11px 32px;
+        position: relative;
+        border-bottom: 1px solid #f1f5f9;
+        color: #475569;
+        font-size: 0.93rem;
+        transition: all 0.3s;
+        cursor: default;
+      }
+      .service-list li:last-child {
+        border-bottom: none;
+      }
+      .service-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        transition: all 0.3s;
+      }
+      .service-list li::after {
+        content: "✓";
+        position: absolute;
+        left: 3px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--accent);
+        font-weight: 800;
+        font-size: 0.7rem;
+        transition: all 0.3s;
+      }
+      .service-card.compliance .service-list li::before {
+        background: rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.25);
+      }
+      .service-card.compliance .service-list li::after {
+        color: var(--secondary);
+      }
+      .service-list li:hover {
+        color: var(--primary);
+        padding-left: 40px;
+      }
+      .service-list li:hover::before {
+        background: var(--accent);
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+      }
+      .service-card.compliance .service-list li:hover::before {
+        background: var(--secondary);
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+      }
+      .service-count-tag {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(16, 185, 129, 0.07);
+        border: 1px solid rgba(16, 185, 129, 0.15);
+        border-radius: 10px;
+        padding: 6px 12px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        z-index: 1;
+      }
+      .service-card.compliance .service-count-tag {
+        background: rgba(59, 130, 246, 0.07);
+        border-color: rgba(59, 130, 246, 0.15);
+        color: var(--secondary);
+      }
+
+      /* ══════════════════════════════════
+         PROJECTS — WHITE
+      ══════════════════════════════════ */
+      .projects-section {
+        padding: 110px 5%;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+      .projects-section::before {
+        content: "";
+        position: absolute;
+        top: -200px;
+        left: -200px;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(16, 185, 129, 0.04),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .projects-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+        max-width: 1000px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+      .project-card {
+        background: #fff;
+        padding: 0;
+        border-radius: 30px;
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        cursor: default;
+        display: flex;
+        flex-direction: column;
+      }
+      .project-card:hover {
+        transform: translateY(-16px) scale(1.02);
+        box-shadow: 0 50px 90px rgba(15, 23, 42, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+      }
+      .project-banner {
+        height: 180px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f0fdf9 0%, #eff6ff 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .project-card:nth-child(2) .project-banner {
+        background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+      }
+      .project-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(16, 185, 129, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 185, 129, 0.07) 1px, transparent 1px);
+        background-size: 30px 30px;
+      }
+      .project-card:nth-child(2) .project-banner::before {
+        background-image:
+          linear-gradient(rgba(59, 130, 246, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.07) 1px, transparent 1px);
+      }
+      .project-icon {
+        width: 90px;
+        height: 90px;
+        background: #fff;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        color: var(--accent);
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 16px 40px rgba(16, 185, 129, 0.12);
+        animation: iconFloat 5s ease-in-out infinite;
+        transition: all 0.5s;
+      }
+      .project-card:nth-child(2) .project-icon {
+        color: var(--secondary);
+        border-color: rgba(59, 130, 246, 0.2);
+        box-shadow: 0 16px 40px rgba(59, 130, 246, 0.12);
+        animation-delay: -2.5s;
+      }
+      .project-card:hover .project-icon {
+        transform: scale(1.15) rotate(8deg);
+      }
+      @keyframes iconFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .project-content {
+        padding: 34px 36px 36px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .project-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 100px;
+        padding: 4px 14px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        width: fit-content;
+      }
+      .project-card:nth-child(2) .project-tag {
+        background: rgba(59, 130, 246, 0.08);
+        border-color: rgba(59, 130, 246, 0.2);
+        color: var(--secondary);
+      }
+      .project-content h4 {
+        font-size: 1.25rem;
+        color: var(--primary);
+        margin-bottom: 12px;
+        font-weight: 800;
+        line-height: 1.3;
+        transition: color 0.3s;
+      }
+      .project-card:hover .project-content h4 {
+        color: var(--accent);
+      }
+      .project-card:nth-child(2):hover .project-content h4 {
+        color: var(--secondary);
+      }
+      .project-content p {
+        color: #64748b;
+        font-size: 0.93rem;
+        line-height: 1.75;
+        flex: 1;
+      }
+      .project-stats {
+        display: flex;
+        gap: 0;
+        margin-top: 24px;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 20px;
+      }
+      .project-stat {
+        flex: 1;
+        text-align: center;
+        padding: 0 12px;
+        border-right: 1px solid #f1f5f9;
+      }
+      .project-stat:last-child {
+        border-right: none;
+      }
+      .project-stat-num {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--primary);
+        display: block;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .project-stat-label {
+        font-size: 0.68rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+
+      /* ══════════════════════════════════
+         CERTIFICATIONS — LIGHT
+      ══════════════════════════════════ */
+      .certifications-section {
+        background: linear-gradient(
+          135deg,
+          #f0fdf9 0%,
+          #eff6ff 60%,
+          #f8fafc 100%
+        );
+        padding: 110px 5%;
+        position: relative;
+        overflow: hidden;
+      }
+      .certifications-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+      }
+      .cert-images-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+        position: relative;
+        z-index: 1;
+      }
+      .cert-image-card {
+        background: #fff;
+        border: 1px solid rgba(16, 185, 129, 0.12);
+        border-radius: 24px;
+        overflow: hidden;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: pointer;
+        box-shadow: 0 10px 40px rgba(15, 23, 42, 0.07);
+      }
+      .cert-image-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 40px 70px rgba(16, 185, 129, 0.12);
+        border-color: rgba(16, 185, 129, 0.35);
+      }
+      .cert-img-frame {
+        background: #fff;
+        padding: 16px;
+        aspect-ratio: 3/4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .cert-img-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+      }
+      .cert-img-label {
+        padding: 20px 24px;
+        text-align: center;
+        background: linear-gradient(to top, #f0fdf9, #fff);
+      }
+      .cert-img-label h4 {
+        color: var(--primary);
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .cert-img-label p {
+        color: #64748b;
+        font-size: 0.8rem;
+      }
+      .cert-icon-card {
+        background: #fff;
+        color: var(--primary);
+        padding: 48px 28px;
+        border-radius: 28px;
+        position: relative;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        overflow: hidden;
+        border: 1px solid rgba(16, 185, 129, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+        min-height: 280px;
+        justify-content: center;
+        box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
+      }
+      .cert-icon-card::before {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.06);
+        transition: all 0.6s;
+        z-index: 0;
+      }
+      .cert-icon-card:hover::before {
+        transform: scale(3.5);
+      }
+      .cert-icon-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 40px 70px rgba(16, 185, 129, 0.12);
+        border-color: rgba(16, 185, 129, 0.3);
+      }
+      .cert-icon-card i {
+        font-size: 3rem;
+        color: var(--accent);
+        margin-bottom: 22px;
+        position: relative;
+        z-index: 1;
+        transition: all 0.4s;
+      }
+      .cert-icon-card:hover i {
+        transform: scale(1.2) translateY(-5px);
+      }
+      .cert-icon-card p {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+      }
+      .cert-icon-card p span {
+        color: #64748b;
+        font-weight: 400;
+      }
+
+      /* ══════════════════════════════════
+         INFRASTRUCTURE — WHITE
+      ══════════════════════════════════ */
+      .infra-section {
+        background: #fff;
+      }
+      .infra-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+      .infra-images .img-wrap {
+        background: #fff;
+        height: 380px;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 30px 70px rgba(15, 23, 42, 0.1);
+        border: 6px solid #fff;
+      }
+      .infra-images img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .infra-details h3 {
+        margin-bottom: 24px;
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+      .infra-item {
+        background: #f8fafc;
+        padding: 18px 22px;
+        border-radius: 14px;
+        margin-bottom: 14px;
+        box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s;
+        border: 1px solid #e2e8f0;
+        color: #1e293b;
+      }
+      .infra-item:hover {
+        transform: translateX(8px);
+        border-color: var(--accent);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.1);
+        background: #fff;
+      }
+      .infra-item i {
+        color: var(--accent);
+        font-size: 1.2rem;
+        flex-shrink: 0;
+      }
+
+      /* Lab Gallery */
+      .lab-gallery {
+        margin-top: 50px;
+        background: linear-gradient(135deg, #f0fdf9 0%, #eff6ff 100%);
+        border-radius: 32px;
+        padding: 50px 40px;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(16, 185, 129, 0.1);
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 220px;
+        gap: 16px;
+      }
+      .gallery-item {
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid rgba(16, 185, 129, 0.1);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.07);
+      }
+      .gallery-item:hover {
+        border-color: rgba(16, 185, 129, 0.4);
+        box-shadow: 0 20px 50px rgba(16, 185, 129, 0.15);
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        cursor: pointer;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.08);
+      }
+      .gallery-item-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(15, 23, 42, 0.7),
+          transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.4s;
+        display: flex;
+        align-items: flex-end;
+        padding: 16px;
+        pointer-events: none;
+      }
+      .gallery-item:hover .gallery-item-overlay {
+        opacity: 1;
+      }
+      .gallery-item-label {
+        color: #fff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+      .gallery-item.wide {
+        grid-column: span 2;
+      }
+      .gallery-item.tall {
+        grid-row: span 2;
+      }
+
+      /* ══════════════════════════════════
+         OUR FACILITY — WHITE
+      ══════════════════════════════════ */
+      .facility-section {
+        padding: 100px 5%;
+        background: linear-gradient(135deg, #f0fdf9 0%, #eff6ff 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      .facility-section::before {
+        content: "";
+        position: absolute;
+        top: -150px;
+        right: -150px;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(16, 185, 129, 0.05),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .facility-img-wrap {
+        position: relative;
+        max-width: 960px;
+        margin: 0 auto;
+      }
+      .facility-img-frame {
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 40px 80px rgba(15, 23, 42, 0.12);
+        border: 6px solid #fff;
+        position: relative;
+      }
+      .facility-img-frame img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        max-height: 560px;
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .facility-img-frame:hover img {
+        transform: scale(1.02);
+      }
+      .facility-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          to top,
+          rgba(15, 23, 42, 0.75) 0%,
+          transparent 100%
+        );
+        padding: 36px 40px;
+      }
+      .facility-badges {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .facility-badge {
+        backdrop-filter: blur(8px);
+        border-radius: 10px;
+        padding: 7px 16px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .facility-badge.green {
+        background: rgba(16, 185, 129, 0.2);
+        border: 1px solid rgba(16, 185, 129, 0.4);
+        color: #6ee7b7;
+      }
+      .facility-badge.white {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .facility-address {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.86rem;
+        margin: 0;
+      }
+      .facility-deco-br {
+        position: absolute;
+        bottom: -18px;
+        right: -18px;
+        width: 110px;
+        height: 110px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, var(--accent), var(--secondary));
+        opacity: 0.1;
+        z-index: -1;
+      }
+      .facility-deco-tl {
+        position: absolute;
+        top: -14px;
+        left: -14px;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: var(--accent);
+        opacity: 0.07;
+        z-index: -1;
+      }
+
+      /* ══════════════════════════════════
+         TESTIMONIALS — LIGHT
+      ══════════════════════════════════ */
+      .testimonials-section {
+        background: linear-gradient(
+          135deg,
+          #f8fafc 0%,
+          #f0fdf9 50%,
+          #eff6ff 100%
+        );
+        padding: 100px 5%;
+        position: relative;
+        overflow: hidden;
+      }
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 28px;
+      }
+      .testimonial-card {
+        background: #fff;
+        color: var(--primary);
+        padding: 48px 40px;
+        border-radius: 28px;
+        position: relative;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        overflow: hidden;
+        border: 1px solid rgba(16, 185, 129, 0.12);
+        box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
+      }
+      .testimonial-card::before {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.05);
+        transition: 0.6s;
+      }
+      .testimonial-card:hover::before {
+        transform: scale(3.5);
+      }
+      .testimonial-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 40px 70px rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.25);
+      }
+      .testimonial-card i.fa-quote-left {
+        font-size: 2.5rem;
+        color: var(--accent);
+        opacity: 0.15;
+        position: absolute;
+        top: 24px;
+        left: 24px;
+      }
+      .testimonial-card p {
+        font-style: italic;
+        margin-bottom: 22px;
+        position: relative;
+        z-index: 1;
+        line-height: 1.8;
+        color: #475569;
+      }
+      .testimonial-author {
+        color: var(--accent);
+        font-weight: 800;
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      /* ══════════════════════════════════
+         CAREERS — WHITE
+      ══════════════════════════════════ */
+      .careers-section {
+        background: #fff;
+      }
+      .career-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 28px;
+      }
+      .job-card {
+        background: #fff;
+        padding: 36px;
+        border-radius: 24px;
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.07);
+        border: 1px solid #e2e8f0;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      .job-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--secondary));
+      }
+      .job-card:hover {
+        border-color: rgba(16, 185, 129, 0.3);
+        transform: translateY(-8px);
+        box-shadow: 0 30px 60px rgba(16, 185, 129, 0.1);
+      }
+      .job-tag {
+        display: inline-block;
+        padding: 5px 14px;
+        background: rgba(16, 185, 129, 0.08);
+        color: var(--accent);
+        border-radius: 100px;
+        font-size: 0.73rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        border: 1px solid rgba(16, 185, 129, 0.2);
+      }
+      .job-card h4 {
+        font-size: 1.35rem;
+        margin-bottom: 12px;
+        color: var(--primary);
+      }
+      .job-details {
+        list-style: none;
+        margin-bottom: 18px;
+      }
+      .job-details li {
+        font-size: 0.88rem;
+        color: #64748b;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .job-details li i {
+        color: var(--accent);
+      }
+      .job-card p {
+        font-size: 0.9rem;
+        margin-bottom: 22px;
+        color: #475569;
+      }
+      .apply-btn {
+        text-decoration: none;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: gap 0.3s;
+      }
+      .apply-btn:hover {
+        gap: 12px;
+      }
+
+      /* ══════════════════════════════════
+         CLIENTS SERVED — LIGHT GRADIENT
+      ══════════════════════════════════ */
+      .clients-served-section {
+        padding: 100px 5%;
+        background: linear-gradient(
+          135deg,
+          #f0fdf9 0%,
+          #eff6ff 60%,
+          #f8fafc 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .serve-grid-dark {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 24px;
+      }
+      .serve-card-dark {
+        background: #fff;
+        padding: 44px 28px 38px;
+        border-radius: 24px;
+        position: relative;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        overflow: hidden;
+        border: 1px solid rgba(16, 185, 129, 0.12);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: default;
+        box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+      }
+      .serve-card-dark .serve-glow-orb {
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: rgba(16, 185, 129, 0.05);
+        transition: all 0.6s;
+        z-index: 0;
+      }
+      .serve-card-dark:hover .serve-glow-orb {
+        transform: scale(3.5);
+      }
+      .serve-card-dark:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 40px 70px rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.25);
+      }
+      .serve-icon-dark {
+        width: 72px;
+        height: 72px;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.7rem;
+        color: var(--accent);
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+        transition: all 0.5s;
+      }
+      .serve-card-dark:hover .serve-icon-dark {
+        background: linear-gradient(135deg, var(--accent), #059669);
+        border-color: var(--accent);
+        color: #fff;
+        transform: scale(1.12) translateY(-4px);
+        box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+      }
+      .serve-card-dark p {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ══════════════════════════════════
+         CONTACT — WHITE
+      ══════════════════════════════════ */
+      .contact-section {
+        background: linear-gradient(135deg, #f0fdf9 0%, #eff6ff 100%);
+      }
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1.3fr;
+        gap: 60px;
+        background: #fff;
+        padding: 64px;
+        border-radius: 40px;
+        box-shadow: 0 30px 80px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-container::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(16, 185, 129, 0.04),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .contact-info h3 {
+        font-size: 1.9rem;
+        font-weight: 800;
+        margin-bottom: 14px;
+        color: var(--primary);
+      }
+      .contact-info > p {
+        margin-bottom: 30px;
+        color: #64748b;
+      }
+      .info-item {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 22px;
+        align-items: flex-start;
+      }
+      .info-icon {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(16, 185, 129, 0.1),
+          rgba(16, 185, 129, 0.04)
+        );
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s;
+      }
+      .info-item:hover .info-icon {
+        background: var(--accent);
+        color: #fff;
+        transform: scale(1.1) rotate(5deg);
+      }
+      .info-item strong {
+        display: block;
+        color: var(--primary);
+        margin-bottom: 2px;
+        font-size: 0.88rem;
+      }
+      .info-item span {
+        color: #64748b;
+        font-size: 0.93rem;
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 15px 18px;
+        margin-bottom: 14px;
+        border-radius: 14px;
+        border: 1.5px solid #e2e8f0;
+        background: #f8fafc;
+        outline: none;
+        transition: all 0.3s;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 0.92rem;
+        color: var(--primary);
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        background: #fff;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px var(--accent-glow2);
+      }
+      .form-group select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 16px center;
+        background-size: 16px;
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+      .toast {
+        position: fixed;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: #fff;
+        border-radius: 16px;
+        padding: 16px 24px;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-weight: 600;
+        font-size: 0.93rem;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        border: 1px solid #e2e8f0;
+        min-width: 320px;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+      }
+      .toast-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+      .toast.success .toast-icon {
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--accent);
+      }
+      .toast.error .toast-icon {
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+      }
+      .toast-text {
+        flex: 1;
+      }
+      .toast-title {
+        color: var(--primary);
+        margin-bottom: 2px;
+      }
+      .toast-sub {
+        color: #64748b;
+        font-size: 0.82rem;
+        font-weight: 400;
+      }
+      .btn-3d {
+        padding: 15px 30px;
+        background: var(--primary);
+        color: #fff;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow:
+          0 6px 0 rgba(0, 0, 0, 0.35),
+          0 2px 10px rgba(15, 23, 42, 0.15);
+        position: relative;
+        border: none;
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .btn-3d::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+        pointer-events: none;
+      }
+      .btn-3d:hover {
+        transform: translateY(-3px);
+        box-shadow:
+          0 9px 0 rgba(0, 0, 0, 0.3),
+          0 15px 30px rgba(15, 23, 42, 0.15);
+      }
+      .btn-3d:active {
+        transform: translateY(3px);
+        box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35);
+      }
+      .btn-accent {
+        background: linear-gradient(135deg, var(--accent), #059669);
+        box-shadow:
+          0 6px 0 #065f46,
+          0 2px 15px var(--accent-glow);
+      }
+      .btn-accent:hover {
+        box-shadow:
+          0 9px 0 #065f46,
+          0 15px 35px var(--accent-glow);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--primary);
+        box-shadow:
+          0 6px 0 #cbd5e1,
+          0 2px 10px rgba(15, 23, 42, 0.06);
+        border: 2px solid rgba(15, 23, 42, 0.15);
+      }
+      .btn-outline:hover {
+        background: rgba(15, 23, 42, 0.03);
+        box-shadow: 0 9px 0 #cbd5e1;
+      }
+      .btn-3d .spinner {
+        display: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        flex-shrink: 0;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .btn-3d.loading .spinner {
+        display: block;
+      }
+      .btn-3d.loading .btn-label {
+        opacity: 0.7;
+      }
+      .form-success {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 20px;
+        gap: 16px;
+      }
+      .form-success.show {
+        display: flex;
+      }
+      .form-success-icon {
+        width: 72px;
+        height: 72px;
+        background: linear-gradient(135deg, var(--accent), #059669);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: #fff;
+        box-shadow: 0 16px 40px rgba(16, 185, 129, 0.35);
+        animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      }
+      @keyframes popIn {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+      .form-success h4 {
+        font-size: 1.3rem;
+        color: var(--primary);
+        font-weight: 800;
+      }
+      .form-success p {
+        color: #64748b;
+        font-size: 0.93rem;
+      }
+      .form-success .ref-badge {
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.2);
+        border-radius: 10px;
+        padding: 8px 18px;
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      /* LIGHTBOX */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        z-index: 9000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lightbox-inner {
+        position: relative;
+        max-width: 700px;
+        width: 100%;
+        max-height: 90vh;
+      }
+      .lightbox-inner img {
+        width: 100%;
+        height: auto;
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+      }
+      .lightbox-close {
+        position: absolute;
+        top: -16px;
+        right: -16px;
+        width: 44px;
+        height: 44px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      /* ══════════════════════════════════
+         FOOTER — DARK (KEPT AS ACCENT)
+      ══════════════════════════════════ */
+      footer {
+        padding: 50px 5%;
+        background: var(--primary);
+        color: #94a3b8;
+        text-align: center;
+      }
+      footer .footer-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        text-decoration: none;
+      }
+      footer .footer-logo-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--accent), #059669);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1rem;
+      }
+      footer p {
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+      }
+      footer .footer-tag {
+        font-size: 0.7rem;
+        opacity: 0.5;
+        margin-top: 8px;
+      }
+
+      /* ══════════════════════════════════
+         RESPONSIVE
+      ══════════════════════════════════ */
+      @media (max-width: 1100px) {
+        .hero-inner {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          padding-top: 20px;
+        }
+        .hero-content h1 {
+          font-size: 3rem;
+        }
+        .hero-building {
+          max-width: 560px;
+          width: 100%;
+        }
+        .services-container {
+          grid-template-columns: 1fr;
+        }
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+        .directors-grid {
+          grid-template-columns: 1fr;
+        }
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .gallery-item.wide {
+          grid-column: span 1;
+        }
+        .nav-links {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+      @media (max-width: 968px) {
+        .hero-content h1 {
+          font-size: 2.6rem;
+        }
+        .about-grid,
+        .contact-container,
+        .infra-grid {
+          grid-template-columns: 1fr;
+        }
+        .vision-mission {
+          grid-template-columns: 1fr;
+        }
+        .contact-container {
+          padding: 36px;
+        }
+        section {
+          padding: 80px 4%;
+        }
+        .directors-section {
+          padding: 80px 4%;
+        }
+        .services-wrapper,
+        .projects-section,
+        .certifications-section {
+          padding: 80px 4%;
+        }
+        .lab-gallery {
+          padding: 30px 20px;
+        }
+      }
+      @media (max-width: 600px) {
+        .hero-content h1 {
+          font-size: 2rem;
+          letter-spacing: -0.5px;
+        }
+        .badge-strip {
+          padding: 18px;
+          gap: 10px;
+        }
+        .section-title1 h2 {
+          font-size: 2rem;
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-auto-rows: 160px;
+        }
+        .hero-stat-row {
+          gap: 12px;
+        }
+        .hero-stat-chip {
+          padding: 12px 14px;
+        }
+      }
+      @media (max-width: 480px) {
+        section {
+          padding: 60px 4%;
+        }
+        .hero-stat-row {
+          flex-direction: column;
+        }
+        .hero-stat-chip {
+          width: 100%;
+        }
+        .why-choose-grid {
+          grid-template-columns: 1fr;
+        }
+        .serve-grid-dark {
+          grid-template-columns: 1fr 1fr;
+        }
+        .badge-strip {
+          flex-direction: column;
+        }
+        .btn-3d {
+          width: 100%;
+          justify-content: center;
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        .serve-grid-dark {
+          grid-template-columns: 1fr;
+        }
+      }
+      body,
+      html {
+        overflow-x: hidden;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* ══════════════ HOME CERTIFICATES ══════════════ */
+      .home-certificates {
+        padding: 80px 5%;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      }
+
+      .home-cert-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 28px;
+        margin-top: 40px;
+      }
+
+      .home-cert-card {
+        background: #fff;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+        transition: 0.35s ease;
+        cursor: pointer;
+        border: 1px solid rgba(16, 185, 129, 0.12);
+      }
+
+      .home-cert-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.14);
+      }
+
+      .home-cert-card img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        display: block;
+      }
+
+      .home-cert-card h4 {
+        padding: 18px;
+        text-align: center;
+        font-size: 1rem;
+        color: #0f172a;
+        font-weight: 700;
+      }
+
+      @media (max-width: 768px) {
+        .home-cert-card img {
+          height: 260px;
+        }
+      }
+
+      /* GOOGLE MAP SECTION */
+      .contact-map-container {
+        width: 100%;
+        margin-top: 30px;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+      }
+
+      /* ══════════════ GALLERY LIGHTBOX ZOOM ══════════════ */
+      .gallery-lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 99999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        animation: glbFadeIn 0.25s ease;
+      }
+      @keyframes glbFadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+      .gallery-lightbox.open {
+        display: flex;
+      }
+      .gallery-lightbox-inner {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .gallery-lightbox-inner img {
+        max-width: 90vw;
+        max-height: 88vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 16px;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+        animation: glbImgIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      @keyframes glbImgIn {
+        from { transform: scale(0.88); opacity: 0; }
+        to   { transform: scale(1);    opacity: 1; }
+      }
+      .gallery-lightbox-close {
+        position: absolute;
+        top: -18px;
+        right: -18px;
+        width: 46px;
+        height: 46px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
+        transition: transform 0.2s, background 0.2s;
+        z-index: 2;
+      }
+      .gallery-lightbox-close:hover {
+        background: #059669;
+        transform: scale(1.1) rotate(90deg);
+      }
+      .gallery-lightbox-label {
+        position: absolute;
+        bottom: -38px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255,255,255,0.75);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+      }
+      /* nav arrows */
+      .gallery-lightbox-prev,
+      .gallery-lightbox-next {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, transform 0.2s;
+        z-index: 100000;
+      }
+      .gallery-lightbox-prev { left: 16px; }
+      .gallery-lightbox-next { right: 16px; }
+      .gallery-lightbox-prev:hover,
+      .gallery-lightbox-next:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        transform: translateY(-50%) scale(1.1);
+      }
+      @media (max-width: 600px) {
+        .gallery-lightbox-prev { left: 6px; }
+        .gallery-lightbox-next { right: 6px; }
+      }
+    </style>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+      <div class="toast-icon"><i class="fas fa-check" id="toastIcon"></i></div>
+      <div class="toast-text">
+        <div class="toast-title" id="toastTitle">Message sent!</div>
+        <div class="toast-sub" id="toastSub">We'll be in touch shortly.</div>
+      </div>
+    </div>
+
+    <!-- Original Lightbox (for certificates) -->
+    <div class="lightbox" id="certLightbox" onclick="closeLightbox()">
+      <div class="lightbox-inner" onclick="event.stopPropagation()">
+        <button class="lightbox-close" onclick="closeLightbox()">
+          <i class="fas fa-times"></i>
+        </button>
+        <img id="lightboxImg" src="" alt="Certificate" />
+      </div>
+    </div>
+
+    <!-- Gallery Lightbox (for lab photos) -->
+    <div class="gallery-lightbox" id="galleryLightbox" onclick="closeGalleryLightbox()">
+      <button class="gallery-lightbox-prev" id="glbPrev" onclick="event.stopPropagation(); galleryNav(-1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="gallery-lightbox-inner" onclick="event.stopPropagation()">
+        <button class="gallery-lightbox-close" onclick="closeGalleryLightbox()">
+          <i class="fas fa-times"></i>
+        </button>
+        <img id="galleryLightboxImg" src="" alt="Lab Photo" />
+        <div class="gallery-lightbox-label" id="galleryLightboxLabel"></div>
+      </div>
+      <button class="gallery-lightbox-next" id="glbNext" onclick="event.stopPropagation(); galleryNav(1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <button
+      class="scroll-top"
+      id="scrollTop"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ══════════════ TOP INFO BAR ══════════════ -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <i class="fas fa-circle" style="font-size: 6px; color: var(--accent)"></i>
+        <span>NABL Accredited &nbsp;·&nbsp; MoEF&CC Recognized &nbsp;·&nbsp; ISO 9001 &amp; 45001</span>
+      </div>
+      <div class="top-bar-right">
+        <a class="top-bar-item" href="tel:+918530074787">
+          <i class="fas fa-mobile-screen-button"></i>
+          +91 85300 74787
+        </a>
+        <div class="top-bar-divider"></div>
+        <a class="top-bar-item" href="tel:02024240030">
+          <i class="fas fa-phone"></i>
+          020 24240030
+        </a>
+        <div class="top-bar-divider"></div>
+        <a class="top-bar-item" href="mailto:akankshalab2007@gmail.com">
+          <i class="fas fa-envelope"></i>
+          akankshalab2007@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <!-- ══════════════ NAV ══════════════ -->
+    <nav id="navbar">
+      <a href="#home" class="logo">
+        <div class="logo-icon">
+          <img src="./img/Logo.png" alt="Akanksha Analytical Logo" />
+        </div>
+        <div class="logo-text">
+          <b>AKANKSHA ANALYTICAL</b><span>& Research Lab</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#directors">Directors</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#infrastructure">Infrastructure</a></li>
+        <li><a href="#our-facility">Location</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#careers">Careers</a></li>
+        <li><a href="#clients-served">Clients</a></li>
+        <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+        <li>
+          <a href="admin/index.html" style="background: rgba(16, 185, 129, 0.08); color: var(--accent); border-radius: 10px; padding: 6px 10px; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; white-space: nowrap;" title="Admin Panel">
+            <i class="fas fa-lock" style="margin-right: 4px"></i>Admin
+          </a>
+        </li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#home" onclick="closeMobile()">Home</a>
+      <a href="#about" onclick="closeMobile()">About</a>
+      <a href="#directors" onclick="closeMobile()">Directors</a>
+      <a href="#services" onclick="closeMobile()">Services</a>
+      <a href="#projects" onclick="closeMobile()">Projects</a>
+      <a href="#certifications" onclick="closeMobile()">Certifications</a>
+      <a href="#infrastructure" onclick="closeMobile()">Infrastructure</a>
+      <a href="#our-facility" onclick="closeMobile()">Location</a>
+      <a href="#testimonials" onclick="closeMobile()">Testimonials</a>
+      <a href="#careers" onclick="closeMobile()">Careers</a>
+      <a href="#clients-served" onclick="closeMobile()">Clients</a>
+      <a href="#contact" onclick="closeMobile()">Contact</a>
+      <a href="admin/index.html" style="color: var(--accent)">
+        <i class="fas fa-lock" style="margin-right: 6px"></i>Admin Panel
+      </a>
+    </div>
+
+    <!-- ══════════════ HERO ══════════════ -->
+    <section id="home" class="hero">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-inner">
+        <div class="hero-content" data-aos="fade-right">
+          <div class="hero-label">
+            <span class="pulse"></span>NABL Accredited · CPCB Recognized
+          </div>
+          <h1>
+            Akanksha Analytical<br />and
+            <span style="color: var(--accent)">Research Lab</span>
+          </h1>
+          <p>
+            Providing high-quality environmental testing and monitoring services
+            for water, wastewater, construction projects, air quality, and
+            industrial emissions.
+          </p>
+          <div class="hero-btns">
+            <a href="#contact" class="btn-3d btn-accent"><i class="fas fa-paper-plane"></i> Request a Quote</a>
+            <a href="#services" class="btn-3d btn-outline"><i class="fas fa-flask"></i> Our Services</a>
+          </div>
+          <div class="hero-stat-row">
+            <div class="hero-stat-chip">
+              <div class="chip-icon"><i class="fas fa-award"></i></div>
+              <div>
+                <div class="chip-num">NABL+</div>
+                <div class="chip-label">Accredited Lab</div>
+              </div>
+            </div>
+            <div class="hero-stat-chip">
+              <div class="chip-icon"><i class="fas fa-certificate"></i></div>
+              <div>
+                <div class="chip-num">ISO</div>
+                <div class="chip-label">9001 & 45001</div>
+              </div>
+            </div>
+            <div class="hero-stat-chip">
+              <div class="chip-icon"><i class="fas fa-shield-halved"></i></div>
+              <div>
+                <div class="chip-num">CPCB ✓</div>
+                <div class="chip-label">MoEF&CC</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-building" data-aos="fade-left">
+          <div class="hero-deco-dot hero-deco-dot-1"></div>
+          <div class="hero-deco-dot hero-deco-dot-2"></div>
+          <div class="hero-building-frame">
+            <img src="./img/building.jpeg" alt="building_img" />
+            <div class="hero-building-badge">
+              <div class="hero-building-badge-icon">
+                <i class="fas fa-location-dot"></i>
+              </div>
+              <div class="hero-building-badge-text">
+                <strong>GangaDham Phase I, Bibwewadi, Pune</strong>
+                <span>MoEF&CC Recognized since 2006</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ HOME CERTIFICATES ══════════════ -->
+    <section class="home-certificates">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-award"></i> Certifications</div>
+        <h2>Our Certificates & Accreditations</h2>
+        <p>Click on any certificate to view and zoom.</p>
+      </div>
+      <div class="home-cert-grid">
+        <div class="home-cert-card" data-aos="zoom-in" onclick="openLightboxImg('./img/ISO 9001 (1).jpg')">
+          <img src="./img/ISO 9001 (1).jpg" alt="ISO 9001 Certificate" />
+          <h4>ISO 9001:2015</h4>
+        </div>
+        <div class="home-cert-card" data-aos="zoom-in" data-aos-delay="100" onclick="openLightboxImg('./img/ISO 45001 (1).jpg')">
+          <img src="./img/ISO 45001 (1).jpg" alt="ISO 45001 Certificate" />
+          <h4>ISO 45001:2018</h4>
+        </div>
+        <div class="home-cert-card" data-aos="zoom-in" data-aos-delay="200" onclick="openLightboxImg('./img/NABL_certificate.png')">
+          <img src="./img/NABL_certificate.png" alt="NABL Certificate" style="cursor: pointer" />
+          <h4>NABL ISO/IEC 17025:2017</h4>
+        </div>
+        <div class="home-cert-card" data-aos="zoom-in" data-aos-delay="300" onclick="openLightboxImg('./img/CPCB_certificate.png')">
+          <img src="" alt="" style="cursor: pointer" />
+          <h4></h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ ABOUT ══════════════ -->
+    <section id="about" class="about-section">
+      <div class="about-grid">
+        <div class="about-text" data-aos="fade-up">
+          <div class="section-label"><i class="fas fa-info-circle"></i> About Our Lab</div>
+          <h2>Environmental Testing <span style="color: var(--accent)">You Can Trust</span></h2>
+          <p>
+            At Akanksha Analytical & Research Lab, we specialize in
+            comprehensive environmental testing services, ensuring regulatory
+            compliance and safeguarding public health. Our state-of-the-art
+            laboratory is equipped with advanced technology and experienced
+            professionals dedicated to delivering precise and timely results.
+          </p>
+          <p>
+            We also provide expert environmental end-to-end support for SPCB
+            licensing, ensuring regulatory compliance for industries across
+            various sectors.
+          </p>
+          <div class="vision-mission">
+            <div class="vm-card" data-aos="fade-up">
+              <h4><i class="fas fa-bullseye" style="color: var(--accent); margin-right: 8px"></i>Our Mission</h4>
+              <p>To support sustainable development by delivering environmental monitoring and analytical services that meet regulatory standards and protect public health.</p>
+            </div>
+            <div class="vm-card" data-aos="fade-up" data-aos-delay="100">
+              <h4><i class="fas fa-eye" style="color: var(--secondary); margin-right: 8px"></i>Our Vision</h4>
+              <p>To be recognized as a leading, reliable, and innovative environmental laboratory in India.</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-img" data-aos="fade-left">
+          <div class="img-wrap">
+            <img src="./img/about.webp" alt="Environmental Lab Specialist" />
+          </div>
+          <div class="about-deco"></div>
+          <div class="about-deco-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ WHY CHOOSE US ══════════════ -->
+    <section id="why-us" class="why-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-star"></i> Our Strengths</div>
+        <h2>Why Choose Us</h2>
+        <p>Setting the gold standard in environmental analytical research.</p>
+      </div>
+      <div class="why-choose-grid">
+        <div class="choose-card" data-aos="zoom-in">
+          <div class="choose-icon-wrap"><i class="fas fa-award"></i></div>
+          <h4>Accredited Laboratory</h4>
+          <p>Accurate and certified lab results for compliance.</p>
+        </div>
+        <div class="choose-card" data-aos="zoom-in" data-aos-delay="60">
+          <div class="choose-icon-wrap"><i class="fas fa-microchip"></i></div>
+          <h4>Advanced Technology</h4>
+          <p>Cutting-edge instruments for accurate analysis.</p>
+        </div>
+        <div class="choose-card" data-aos="zoom-in" data-aos-delay="120">
+          <div class="choose-icon-wrap"><i class="fas fa-bolt"></i></div>
+          <h4>Fast & Reliable Results</h4>
+          <p>Quick turnaround time with precise data.</p>
+        </div>
+        <div class="choose-card" data-aos="zoom-in" data-aos-delay="180">
+          <div class="choose-icon-wrap"><i class="fas fa-microscope"></i></div>
+          <h4>Experienced Professionals</h4>
+          <p>A team of skilled chemists and analysts.</p>
+        </div>
+        <div class="choose-card" data-aos="zoom-in" data-aos-delay="240">
+          <div class="choose-icon-wrap"><i class="fas fa-sliders"></i></div>
+          <h4>Customized Solutions</h4>
+          <p>Tailored testing packages to meet specific client needs.</p>
+        </div>
+        <div class="choose-card" data-aos="zoom-in" data-aos-delay="300">
+          <div class="choose-icon-wrap"><i class="fas fa-history"></i></div>
+          <h4>Years of Expertise</h4>
+          <p>Successfully handling SPCB licensing for industries.</p>
+        </div>
+        <div class="choose-card" data-aos="zoom-in" data-aos-delay="360">
+          <div class="choose-icon-wrap"><i class="fas fa-circle-check"></i></div>
+          <h4>Hassle-Free Process</h4>
+          <p>End-to-end documentation and compliance assistance.</p>
+        </div>
+        <div class="choose-card" data-aos="zoom-in" data-aos-delay="420">
+          <div class="choose-icon-wrap"><i class="fas fa-scale-balanced"></i></div>
+          <h4>Regulatory Compliance</h4>
+          <p>Ensuring smooth approvals with minimal delays.</p>
+        </div>
+        <div class="choose-card" data-aos="zoom-in" data-aos-delay="480">
+          <div class="choose-icon-wrap"><i class="fas fa-tag"></i></div>
+          <h4>Economical Rates</h4>
+          <p>Service provided with compatible rates.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ DIRECTORS ══════════════ -->
+    <section id="directors" class="directors-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-users-gear"></i> Leadership</div>
+        <h2>Meet Our Directors</h2>
+        <p>The visionary leadership guiding Akanksha Analytical towards excellence since 2006.</p>
+      </div>
+      <div class="directors-grid">
+        <div class="director-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="director-img-wrap">
+            <img src="./img/Mahendra Katariya.jpeg" alt="Mr. Mahendra Katariya – Partner"
+              onerror="this.onerror=null;this.src='https://placehold.co/600x400/f0fdf9/10b981?text=Mr.+Mahendra+Katariya';" />
+            <div class="director-img-overlay"></div>
+          </div>
+          <div class="director-info">
+            <div class="director-role-badge"><i class="fas fa-briefcase"></i> Partner</div>
+            <div class="director-name">Mr. Mahendra Katariya</div>
+            <div class="director-title">Partner & Strategic Director — 30+ Years of Leadership</div>
+            <div class="director-bio">
+              Mr. Mahendra Katariya brings over three decades of leadership experience in environmental compliance and laboratory operations. He is instrumental in steering the organization with a clear focus on regulatory excellence, operational integrity, and client trust.
+            </div>
+            <div class="director-bio-full" id="bioMahendra">
+              <p style="margin-bottom: 12px; font-size: 0.9rem; color: #475569; line-height: 1.8;">
+                With a strong foundation in commerce (B.Com.) and deep domain expertise, Mr. Katariya is widely recognized for his proficiency in State Pollution Control Board (SPCB) compliance. He has consistently guided industries in meeting stringent environmental regulations, ensuring seamless alignment with statutory requirements and sustainable practices.
+              </p>
+              <p style="margin-bottom: 12px; font-size: 0.9rem; color: #475569; line-height: 1.8;">
+                Under his leadership, the laboratory has achieved and maintained key recognitions from MoEF, NABL, and adherence to ISO standards. He has successfully led and supported critical environmental infrastructure projects, including ETP, STP, and RO systems.
+              </p>
+              <p style="font-size: 0.9rem; color: #475569; line-height: 1.8;">
+                Driven by a commitment to environmental protection, quality, and sustainability, he continues to strengthen the laboratory's reputation as a trusted partner for industries and regulators alike. Established as a recognized MoEF laboratory since 2006, the organization reflects his enduring vision of delivering reliable, compliant, and future-ready environmental solutions.
+              </p>
+            </div>
+            <button class="read-more-btn" onclick="toggleBio('bioMahendra', this)">
+              Read More <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="director-quals">
+              <span class="director-qual">B.Com.</span>
+              <span class="director-qual">SPCB Compliance Expert</span>
+              <span class="director-qual">ETP / STP / RO Systems</span>
+              <span class="director-qual">Regulatory Advisory</span>
+            </div>
+          </div>
+        </div>
+        <div class="director-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="director-img-wrap">
+            <img src="./img/Vaishali Katariya.jpeg" alt="Ms. Vaishali Katariya – Partner"
+              onerror="this.onerror=null;this.src='https://placehold.co/600x400/f0fdf9/10b981?text=Ms.+Vaishali+Katariya';" />
+            <div class="director-img-overlay"></div>
+          </div>
+          <div class="director-info">
+            <div class="director-role-badge"><i class="fas fa-briefcase"></i> Partner</div>
+            <div class="director-name">Ms. Vaishali Katariya</div>
+            <div class="director-title">Partner & Operations Director — 20+ Years of Experience</div>
+            <div class="director-bio">
+              Ms. Vaishali Katariya is a key pillar of the organization, bringing over 20 years of experience in administration, accounts, and operational management. She plays a vital role in ensuring the seamless functioning of the laboratory through strong administrative control, financial discipline, and process efficiency.
+            </div>
+            <div class="director-bio-full" id="bioVaishali">
+              <p style="margin-bottom: 12px; font-size: 0.9rem; color: #475569; line-height: 1.8;">
+                Holding a Bachelor of Science in Computer Science (B.Sc. Computer), Ms. Katariya combines technical understanding with managerial expertise to oversee core business operations. Her specialization in administration enables the organization to maintain structured workflows, robust documentation, and effective coordination across all departments.
+              </p>
+              <p style="margin-bottom: 12px; font-size: 0.9rem; color: #475569; line-height: 1.8;">
+                She is actively involved in leadership, regulatory compliance support, quality control systems, and the management of administrative and financial functions. Her systematic approach ensures that the organization consistently aligns with standards set by MoEF, NABL, and ISO.
+              </p>
+              <p style="font-size: 0.9rem; color: #475569; line-height: 1.8;">
+                With a strong commitment to quality and sustainability, Ms. Katariya contributes significantly to maintaining the laboratory's credibility and operational excellence. As part of a laboratory recognized by MoEF since 2006, she continues to strengthen internal systems and support the organization's mission of delivering reliable and compliant environmental services.
+              </p>
+            </div>
+            <button class="read-more-btn" onclick="toggleBio('bioVaishali', this)">
+              Read More <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="director-quals">
+              <span class="director-qual">B.Sc. Computer Science</span>
+              <span class="director-qual">Administration & Finance</span>
+              <span class="director-qual">Quality Control Systems</span>
+              <span class="director-qual">Regulatory Compliance</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ SERVICES ══════════════ -->
+    <section class="services-wrapper" id="services">
+      <div class="services-header" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-flask"></i> What We Do</div>
+        <h2>Our Specialized Services</h2>
+        <p>Comprehensive environmental analysis and regulatory support.</p>
+      </div>
+      <div class="services-container">
+        <div class="service-card" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})" style="cursor:pointer" data-aos="fade-up" data-aos-delay="100">
+          <span class="service-count-tag">11 Services</span>
+          <div class="service-card-header" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})" style="cursor:pointer">
+            <div class="service-icon-box"><i class="fas fa-leaf"></i></div>
+            <h3>Environmental Analysis</h3>
+          </div>
+          <ul class="service-list">
+            <li onclick="event.stopPropagation();selectService('Ambient Air Monitoring');" style="cursor:pointer">Ambient Air Monitoring</li>
+            <li onclick="event.stopPropagation();selectService('Workplace Air Monitoring');" style="cursor:pointer">Workplace Air Monitoring</li>
+            <li onclick="event.stopPropagation();selectService('Stack Emission Monitoring');" style="cursor:pointer">Stack Emission Monitoring</li>
+            <li onclick="event.stopPropagation();selectService('Noise Monitoring');" style="cursor:pointer">Noise Monitoring</li>
+            <li onclick="event.stopPropagation();selectService('Illumination Monitoring');" style="cursor:pointer">Illumination Monitoring</li>
+            <li onclick="event.stopPropagation();selectService('Ventilation Survey');" style="cursor:pointer">Ventilation Survey</li>
+            <li onclick="event.stopPropagation();selectService('Industrial / Sewage Effluent');" style="cursor:pointer">Industrial / Sewage Effluent</li>
+            <li onclick="event.stopPropagation();selectService('Drinking Water Test');" style="cursor:pointer">Drinking Water Test</li>
+            <li onclick="event.stopPropagation();selectService('Microbiological Testing for Water');" style="cursor:pointer">Microbiological Testing for Water</li>
+            <li onclick="event.stopPropagation();selectService('Sludge, Soil Testing');" style="cursor:pointer">Sludge, Soil Testing</li>
+            <li onclick="event.stopPropagation();selectService('Metal Analysis');" style="cursor:pointer">Metal Analysis</li>
+          </ul>
+        </div>
+        <div class="service-card compliance" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})" style="cursor:pointer" data-aos="fade-up" data-aos-delay="250">
+          <span class="service-count-tag">5 Services</span>
+          <div class="service-card-header" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})" style="cursor:pointer">
+            <div class="service-icon-box"><i class="fas fa-file-shield"></i></div>
+            <h3>SPCB Licensing & Compliance</h3>
+          </div>
+          <ul class="service-list">
+            <li>Expert guidance for obtaining SPCB consents (<strong style="color:var(--primary)">CTE &amp; CTO</strong>)</li>
+            <li onclick="event.stopPropagation();selectService('Environmental impact assessment &amp; documentation');" style="cursor:pointer">Environmental impact assessment &amp; documentation</li>
+            <li onclick="event.stopPropagation();selectService('Assistance in compliance with pollution control norms');" style="cursor:pointer">Assistance in compliance with pollution control norms</li>
+            <li onclick="event.stopPropagation();selectService('Periodic environmental statutory audits &amp; reporting');" style="cursor:pointer">Periodic environmental statutory audits &amp; reporting</li>
+            <li onclick="event.stopPropagation();selectService('Liaison with regulatory authorities for approvals');" style="cursor:pointer">Liaison with regulatory authorities for approvals</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ PROJECTS ══════════════ -->
+    <section id="projects" class="projects-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-diagram-project"></i> Our Work</div>
+        <h2>Our Key Projects</h2>
+        <p>Comprehensive environmental engineering solutions from concept to maintenance.</p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="project-banner">
+            <div class="project-icon"><i class="fas fa-tools"></i></div>
+          </div>
+          <div class="project-content">
+            <div class="project-tag"><i class="fas fa-circle" style="font-size:6px"></i> Infrastructure</div>
+            <h4>Water Pollution Control Systems Erection</h4>
+            <p>End-to-end physical installation and setup of advanced filtration and treatment hardware designed for high-capacity industrial use.</p>
+            <div class="project-stats">
+              <div class="project-stat">
+                <span class="project-stat-num">100<span style="color:var(--accent);font-size:0.9rem">%</span></span>
+                <span class="project-stat-label">Compliance</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-num" style="color:var(--accent)">ETP</span>
+                <span class="project-stat-label">Systems</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-num">24/7</span>
+                <span class="project-stat-label">Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="260">
+          <div class="project-banner">
+            <div class="project-icon"><i class="fas fa-microchip"></i></div>
+          </div>
+          <div class="project-content">
+            <div class="project-tag" style="background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);color:var(--secondary)">
+              <i class="fas fa-circle" style="font-size:6px"></i> O&M
+            </div>
+            <h4>Commissioning and Management</h4>
+            <p>Expert system startup, performance testing, and O&amp;M (Operation and Maintenance) to ensure long-term regulatory compliance and efficiency.</p>
+            <div class="project-stats">
+              <div class="project-stat">
+                <span class="project-stat-num" style="color:var(--secondary)">O&M</span>
+                <span class="project-stat-label">Managed</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-num">Long<span style="color:var(--secondary);font-size:0.75rem">-term</span></span>
+                <span class="project-stat-label">Partnership</span>
+              </div>
+              <div class="project-stat">
+                <span class="project-stat-num">ISO</span>
+                <span class="project-stat-label">Compliant</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ INFRASTRUCTURE ══════════════ -->
+    <section id="infrastructure" class="infra-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-building"></i> Facilities</div>
+        <h2>Laboratory Infrastructure</h2>
+        <p>Our facility is equipped with the latest technology to ensure precision in every test.</p>
+      </div>
+      <div class="infra-grid">
+        <div class="infra-images" data-aos="fade-right">
+          <div class="img-wrap">
+            <img src="./img/Instrument Room.jpeg" alt="Instrument Room — Advanced Scientific Equipment" />
+          </div>
+        </div>
+        <div class="infra-details" data-aos="fade-left">
+          <h3>Equipment & Facilities</h3>
+          <div class="infra-item"><i class="fas fa-microscope"></i> Advanced instruments for chemical and physical analysis</div>
+          <div class="infra-item"><i class="fas fa-broadcast-tower"></i> Field sampling devices for water and air quality</div>
+          <div class="infra-item"><i class="fas fa-smog"></i> Stack emission monitoring equipment</div>
+          <div class="infra-item"><i class="fas fa-vial"></i> Dedicated laboratory for water, wastewater, and air analysis</div>
+          <div class="infra-item"><i class="fas fa-atom"></i> Atomic Absorption Spectrophotometer (AAS)</div>
+          <div class="infra-item"><i class="fas fa-flask"></i> Wet Lab, Hot Room, Balance Room & Document Room</div>
+        </div>
+      </div>
+
+      <!-- Lab Photo Gallery -->
+      <div class="lab-gallery" data-aos="fade-up" data-aos-delay="100">
+        <div class="section-title1" style="margin-top:0;margin-bottom:36px">
+          <div class="section-label"><i class="fas fa-images"></i> Inside Our Lab</div>
+          <h2 style="font-size:2rem">Lab Photo Gallery</h2>
+          <p style="color:#64748b;font-size:0.9rem;margin-top:8px">Click any photo to view full size</p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item wide tall" data-aos="zoom-in" data-gallery-label="Instrument Room">
+            <img src="./img/Instrument Room.jpeg" alt="Instrument Room" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Instrument Room</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="50" data-gallery-label="Titration Analysis">
+            <img src="./img/Titration.jpeg" alt="Analyst conducting titration" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Titration Analysis</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="60" data-gallery-label="AAS Instrument">
+            <img src="./img/AAS Instrument.jpeg" alt="Atomic Absorption Spectrophotometer" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">AAS Instrument</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="70" data-gallery-label="PM 2.5 Sampler">
+            <img src="./img/PM 2.5 Sampler.jpeg" alt="PM 2.5 Sampler" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">PM 2.5 Sampler</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="80" data-gallery-label="Spectrophotometer">
+            <img src="./img/SpectroPhoto Meter.jpeg" alt="Spectrophotometer analysis" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Spectrophotometer</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="90" data-gallery-label="Balance Room">
+            <img src="./img/Analytical Balance.jpeg" alt="Balance Room" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Balance Room</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100" data-gallery-label="Chemicals">
+            <img src="./img/Chemicals.jpeg" alt="Laboratory Overview" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Chemicals</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="110" data-gallery-label="Wet Room">
+            <img src="./img/Wet Room.jpeg" alt="Wet Lab" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Wet Room</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="120" data-gallery-label="Document Room">
+            <img src="./img/Document Room.jpeg" alt="Document Room" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Document Room</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="130" data-gallery-label="Hot Room">
+            <img src="./img/Hot Room.jpeg" alt="Hot Room" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Hot Room</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="140" data-gallery-label="Food Analysis">
+            <img src="./img/Food Analysis.jpeg" alt="Food Analysis" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Food Analysis</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="150" data-gallery-label="RDS PM 10 Sampler">
+            <img src="./img/RDS PM 10 Sampler.jpeg" alt="RDS PM 10 Sampler" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">RDS PM 10 Sampler</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="160" data-gallery-label="Soil Analysis">
+            <img src="./img/Soil Analysis.jpeg" alt="Soil Analysis" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Soil Analysis</span></div>
+          </div>
+          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="160" data-gallery-label="Soil Analysis">
+            <img src="./img/Stack monitoring kit.jpeg" alt="Soil Analysis" />
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Stack Monitoring Kit</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ OUR FACILITY ══════════════ -->
+    <section id="our-facility" class="facility-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-map-location-dot"></i> Our Location</div>
+        <h2>Our Location</h2>
+        <p>Located at GangaDham, Bibwewadi, Pune — an MoEF&CC recognized Environmental Analytical Laboratory since 2006.</p>
+      </div>
+      <div class="contact-map-container" data-aos="fade-left">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3784.0982790022504!2d73.873502!3d18.479207000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDI4JzQ1LjIiTiA3M8KwNTInMjQuNiJF!5e0!3m2!1sen!2sin!4v1779945445235!5m2!1sen!2sin"
+          width="100%" height="450" style="border:0;border-radius:24px" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- ══════════════ TESTIMONIALS ══════════════ -->
+    <section id="testimonials" class="testimonials-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-comments"></i> Client Voices</div>
+        <h2>Client Testimonials</h2>
+        <p>What our partners say about our commitment to excellence.</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card" data-aos="fade-up">
+          <i class="fas fa-quote-left"></i>
+          <p>"The team was professional, reports were accurate, and results helped us meet all regulatory deadlines."</p>
+          <div class="testimonial-author">— Industrial Client, Pune</div>
+        </div>
+        <div class="testimonial-card" data-aos="fade-up" data-aos-delay="150">
+          <i class="fas fa-quote-left"></i>
+          <p>"Reliable and efficient lab with expert staff. We trust AKANKSHA for all our environmental testing."</p>
+          <div class="testimonial-author">— Consultancy Firm</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ CAREERS ══════════════ -->
+    <section id="careers" class="careers-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-users"></i> Join Us</div>
+        <h2>Join Our Team</h2>
+        <p>Build your career with a leading NABL-accredited environmental research laboratory.</p>
+      </div>
+      <div class="career-grid">
+        <div class="job-card" data-aos="fade-up">
+          <span class="job-tag">Full-Time</span>
+          <h4>Senior Analyst</h4>
+          <ul class="job-details">
+            <li><i class="fas fa-briefcase"></i> 3-5 Years Experience</li>
+            <li><i class="fas fa-graduation-cap"></i> M.Sc. in Chemistry / Env Science</li>
+          </ul>
+          <p>Expertise in instrumental analysis (ICP, GC, AAS) and NABL documentation.</p>
+          <a href="mailto:akankshalab2007@gmail.com?subject=Application for Senior Analyst" class="apply-btn">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="job-card" data-aos="fade-up" data-aos-delay="100">
+          <span class="job-tag">Full-Time</span>
+          <h4>Field Technician</h4>
+          <ul class="job-details">
+            <li><i class="fas fa-briefcase"></i> 1-2 Years Experience</li>
+            <li><i class="fas fa-location-dot"></i> Site Sampling Work</li>
+          </ul>
+          <p>Responsible for ambient air, stack, and water sampling across client locations.</p>
+          <a href="mailto:akankshalab2007@gmail.com?subject=Application for Field Technician" class="apply-btn">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="job-card" data-aos="fade-up" data-aos-delay="200">
+          <span class="job-tag">Internship</span>
+          <h4>Lab Assistant</h4>
+          <ul class="job-details">
+            <li><i class="fas fa-briefcase"></i> Freshers Welcome</li>
+            <li><i class="fas fa-clock"></i> 6 Months Duration</li>
+          </ul>
+          <p>Assist senior analysts in day-to-day testing of water and wastewater samples.</p>
+          <a href="mailto:akankshalab2007@gmail.com?subject=Application for Lab Assistant" class="apply-btn">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:50px" data-aos="fade-up">
+        <p style="color:#64748b">Don't see a matching role? Send your CV to <strong style="color:var(--accent)">akankshalab2007@gmail.com</strong></p>
+      </div>
+    </section>
+
+    <!-- ══════════════ CLIENTS SERVED ══════════════ -->
+    <section id="clients-served" class="clients-served-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-handshake"></i> Our Clients</div>
+        <h2>We Serve For</h2>
+        <p>Trusted partners across industries for all environmental testing needs.</p>
+      </div>
+      <div class="serve-grid-dark">
+        <div class="serve-card-dark" data-aos="fade-up" data-aos-delay="80">
+          <div class="serve-icon-dark"><i class="fas fa-industry"></i></div>
+          <p>Manufacturing &amp; Industrial Units</p>
+          <div class="serve-glow-orb"></div>
+        </div>
+        <div class="serve-card-dark" data-aos="fade-up" data-aos-delay="160">
+          <div class="serve-icon-dark"><i class="fas fa-faucet-drip"></i></div>
+          <p>Water Treatment Plants</p>
+          <div class="serve-glow-orb"></div>
+        </div>
+        <div class="serve-card-dark" data-aos="fade-up" data-aos-delay="240">
+          <div class="serve-icon-dark"><i class="fas fa-leaf"></i></div>
+          <p>Environmental Agencies</p>
+          <div class="serve-glow-orb"></div>
+        </div>
+        <div class="serve-card-dark" data-aos="fade-up" data-aos-delay="320">
+          <div class="serve-icon-dark"><i class="fas fa-balance-scale"></i></div>
+          <p>Government &amp; Regulatory Bodies</p>
+          <div class="serve-glow-orb"></div>
+        </div>
+        <div class="serve-card-dark" data-aos="fade-up" data-aos-delay="400">
+          <div class="serve-icon-dark"><i class="fas fa-city"></i></div>
+          <p>Construction &amp; Infrastructure</p>
+          <div class="serve-glow-orb"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ CONTACT ══════════════ -->
+    <section id="contact" class="contact-section">
+      <div class="section-title1" data-aos="fade-up">
+        <div class="section-label"><i class="fas fa-envelope"></i> Reach Out</div>
+        <h2>Get in Touch</h2>
+        <p>Our expert team is ready to assist with your environmental testing requirements.</p>
+      </div>
+      <div class="contact-container" data-aos="fade-up">
+        <div class="contact-info">
+          <h3>Let's Talk</h3>
+          <p>Fill in the form or reach us directly through the details below.</p>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-location-dot"></i></div>
+            <div><strong>Address</strong><span>S. No. 613, Plot No. 5, GangaDham, Phase I, Opp. Ganga Landmark Row Houses, Bibwewadi, Pune – 411037.</span></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-mobile-screen-button"></i></div>
+            <div><strong>Mobile</strong><span>+91 85300 74787</span></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-phone"></i></div>
+            <div><strong>Landline</strong><span>020 24240030</span></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div><strong>Email</strong><span>akankshalab2007@gmail.com</span></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-clock"></i></div>
+            <div><strong>Hours</strong><span>Mon – Sat: 9:00 AM – 5:30 PM</span></div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <div id="contactFormWrap">
+            <form id="contactForm" class="form-group" novalidate>
+              <input type="text" name="website" id="hp_website" style="display:none;opacity:0;position:absolute" tabindex="-1" autocomplete="off" />
+              <input type="text" name="full_name" id="inp_name" placeholder="Full Name *" required autocomplete="name" />
+              <input type="email" name="email" id="inp_email" placeholder="Email Address *" required autocomplete="email" />
+              <select name="service" id="inp_service">
+                <option value="">— Service Interested In (optional) —</option>
+                <optgroup label="Environmental Analysis">
+                  <option>Ambient Air Monitoring</option>
+                  <option>Workplace Air Monitoring</option>
+                  <option>Stack Emission Monitoring</option>
+                  <option>Noise Monitoring</option>
+                  <option>Illumination Monitoring</option>
+                  <option>Ventilation Survey</option>
+                  <option>Industrial / Sewage Effluent</option>
+                  <option>Drinking Water Test</option>
+                  <option>Microbiological Testing for Water</option>
+                  <option>Sludge &amp; Soil Testing</option>
+                  <option>Metal Analysis</option>
+                </optgroup>
+                <optgroup label="SPCB Licensing &amp; Compliance">
+                  <option>SPCB Consent (CTE / CTO)</option>
+                  <option>Environmental Impact Assessment</option>
+                  <option>Pollution Control Compliance</option>
+                  <option>Environmental Statutory Audit</option>
+                  <option>Regulatory Authority Liaison</option>
+                </optgroup>
+                <option value="Other">Other / General Inquiry</option>
+              </select>
+              <textarea name="message" id="inp_message" rows="5" placeholder="How can we help you? *" required></textarea>
+              <button type="submit" class="btn-3d btn-accent" id="submitBtn" style="width:100%;justify-content:center">
+                <span class="spinner"></span>
+                <i class="fas fa-paper-plane btn-label"></i>
+                <span class="btn-label"> Send Inquiry</span>
+              </button>
+            </form>
+          </div>
+          <div class="form-success" id="formSuccess">
+            <div class="form-success-icon"><i class="fas fa-check"></i></div>
+            <h4>Inquiry Submitted!</h4>
+            <p>Thank you for reaching out. We'll get back to you within 1–2 business days.</p>
+            <div class="ref-badge" id="refBadge">Ref #—</div>
+            <button onclick="resetForm()" class="btn-3d btn-outline" style="margin-top:10px;font-size:0.85rem;padding:10px 22px">
+              <i class="fas fa-rotate-left"></i> Send Another
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ FOOTER ══════════════ -->
+    <footer style="padding:60px 20px;background:#0f172a;color:#fff">
+      <div style="max-width:1300px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px;align-items:flex-start">
+        <div>
+          <a href="#home" class="footer-logo" style="display:flex;align-items:center;gap:12px;margin-bottom:18px;text-decoration:none">
+            <div class="footer-logo-icon"><i class="fas fa-flask"></i></div>
+            <b style="color:#fff;font-size:1rem;line-height:1.5">AKANKSHA ANALYTICAL & RESEARCH LAB</b>
+          </a>
+          <p style="color:#cbd5e1;line-height:1.8;font-size:0.95rem">
+            Trusted NABL accredited analytical and environmental testing laboratory providing reliable water, air, soil, food and industrial testing services with modern instruments and expert scientific support.
+          </p>
+          <p class="footer-tag" style="margin-top:18px;color:#94a3b8;line-height:1.8">
+            NABL Accredited | CPCB &amp; MoEF&amp;CC Recognized <br />
+            ISO 9001:2015 | ISO 45001:2018
+          </p>
+        </div>
+        <div>
+          <h3 style="margin-bottom:18px;color:#fff">Contact Information</h3>
+          <p style="margin-bottom:12px;color:#cbd5e1;line-height:1.8"><strong>Phone:</strong><br />+91 85300 74787<br />020-24240030</p>
+          <p style="margin-bottom:12px;color:#cbd5e1;line-height:1.8"><strong>Email:</strong><br />akankshalab2007@gmail.com</p>
+          <p style="color:#cbd5e1;line-height:1.8"><strong>Working Hours:</strong><br />Monday – Saturday<br />9:00 AM – 6:00 PM</p>
+        </div>
+        <div>
+          <h3 style="margin-bottom:18px;color:#fff">Office Address</h3>
+          <p style="color:#cbd5e1;line-height:1.9">
+            S. No. 613, Plot No. 5,<br />
+            GangaDham Phase I,<br />
+            Opp. Ganga Landmark Row Houses,<br />
+            Bibwewadi, Pune – 411037,<br />
+            Maharashtra, India
+          </p>
+          <p style="margin-top:18px;color:#94a3b8">Serving industries, institutions and environmental projects across Maharashtra.</p>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.1);margin-top:40px;padding-top:20px;text-align:center">
+        <p style="color:#94a3b8">© 2026 AKANKSHA ANALYTICAL AND RESEARCH LAB. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Certificate Popup Modal -->
+    <div id="certificateModal" style="display:none;position:fixed;z-index:99999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;padding:20px">
+      <span onclick="closeCertificateModal()" style="position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer">&times;</span>
+      <img id="certificateModalImg" src="" style="max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 0 30px rgba(255,255,255,0.3)" />
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/918530074787" target="_blank"
+      style="position:fixed;width:60px;height:60px;bottom:25px;right:25px;background:#25d366;color:white;border-radius:50%;text-align:center;font-size:32px;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:9999;display:flex;align-items:center;justify-content:center;text-decoration:none">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ══════════════ SCRIPTS ══════════════ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 900, once: true, easing: "ease-out-cubic" });
+
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 20);
+        document.getElementById("scrollTop").classList.toggle("visible", window.scrollY > 400);
+      });
+
+      const ham = document.getElementById("hamburger"), mob = document.getElementById("mobileMenu");
+      ham.addEventListener("click", () => { ham.classList.toggle("open"); mob.classList.toggle("open"); });
+      function closeMobile() { ham.classList.remove("open"); mob.classList.remove("open"); }
+
+      const sections = document.querySelectorAll("section[id], div[id]");
+      const navLinks = document.querySelectorAll(".nav-links a");
+      window.addEventListener("scroll", () => {
+        let cur = "";
+        sections.forEach((s) => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+        navLinks.forEach((a) => { a.classList.remove("active"); if (a.getAttribute("href") === "#" + cur) a.classList.add("active"); });
+      });
+
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const r = card.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+          card.style.transform = `perspective(800px) rotateX(${-(y / r.height) * 5}deg) rotateY(${(x / r.width) * 5}deg) translateY(-16px) scale(1.02)`;
+        });
+        card.addEventListener("mouseleave", () => { card.style.transform = ""; });
+      });
+
+      document.querySelectorAll(".service-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const r = card.getBoundingClientRect(), x = e.clientX - r.left - r.width / 2, y = e.clientY - r.top - r.height / 2;
+          card.style.transform = `perspective(1000px) rotateX(${-(y / r.height) * 3}deg) rotateY(${(x / r.width) * 3}deg) translateY(-10px)`;
+        });
+        card.addEventListener("mouseleave", () => { card.style.transform = ""; });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const items = entry.target.querySelectorAll(".service-list li");
+            items.forEach((li, i) => {
+              li.style.opacity = "0"; li.style.transform = "translateX(-16px)";
+              li.style.transition = `opacity .5s ease ${i * 0.07}s, transform .5s ease ${i * 0.07}s, color .3s, padding-left .3s`;
+              setTimeout(() => { li.style.opacity = "1"; li.style.transform = "translateX(0)"; }, 100 + i * 70);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      document.querySelectorAll(".service-card").forEach((c) => observer.observe(c));
+
+      function toggleBio(id, btn) {
+        const el = document.getElementById(id);
+        const isExpanded = el.classList.toggle("expanded");
+        btn.innerHTML = isExpanded ? 'Show Less <i class="fas fa-arrow-up"></i>' : 'Read More <i class="fas fa-arrow-right"></i>';
+      }
+
+      // Certificate lightbox
+      function openLightboxImg(src) {
+        document.getElementById("lightboxImg").src = src;
+        document.getElementById("certLightbox").classList.add("open");
+      }
+      function closeLightbox() { document.getElementById("certLightbox").classList.remove("open"); }
+
+      // Certificate modal
+      function openCertificateModal(imgSrc) {
+        document.getElementById("certificateModal").style.display = "flex";
+        document.getElementById("certificateModalImg").src = imgSrc;
+      }
+      function closeCertificateModal() { document.getElementById("certificateModal").style.display = "none"; }
+
+      // Contact form
+      const contactForm = document.getElementById("contactForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const formWrap = document.getElementById("contactFormWrap");
+      const formSuccess = document.getElementById("formSuccess");
+      const refBadge = document.getElementById("refBadge");
+      const toast = document.getElementById("toast");
+
+      function showToast(type, title, sub) {
+        toast.className = "toast " + type;
+        document.getElementById("toastTitle").textContent = title;
+        document.getElementById("toastSub").textContent = sub;
+        document.getElementById("toastIcon").className = type === "success" ? "fas fa-check" : "fas fa-triangle-exclamation";
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 5000);
+      }
+      function setLoading(on) { submitBtn.classList.toggle("loading", on); submitBtn.disabled = on; }
+      function resetForm() { contactForm.reset(); formWrap.style.display = ""; formSuccess.classList.remove("show"); }
+
+      contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const name = document.getElementById("inp_name").value.trim();
+        const email = document.getElementById("inp_email").value.trim();
+        const service = document.getElementById("inp_service").value.trim();
+        const message = document.getElementById("inp_message").value.trim();
+        if (!name || name.length < 2) { showToast("error", "Name Required", "Please enter your full name."); document.getElementById("inp_name").focus(); return; }
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRe.test(email)) { showToast("error", "Valid Email Required", "Please enter a valid email address."); document.getElementById("inp_email").focus(); return; }
+        if (!message || message.length < 10) { showToast("error", "Message Too Short", "Please describe your inquiry (min. 10 characters)."); document.getElementById("inp_message").focus(); return; }
+        setLoading(true);
+        const refNum = "INQ-" + Date.now().toString().slice(-6);
+        const inquiry = { ref: refNum, name, email, service: service || "General Inquiry", message, status: "new", date: new Date().toISOString() };
+        const saved = JSON.parse(localStorage.getItem("akal_inquiries") || "[]");
+        saved.unshift(inquiry);
+        localStorage.setItem("akal_inquiries", JSON.stringify(saved));
+        try {
+          const formData = {
+            access_key: WEB3FORMS_KEY,
+            subject: "New Inquiry [" + refNum + "] from " + name + " — Akanksha Analytical",
+            from_name: "Akanksha Analytical Website",
+            replyto: email, name, email,
+            service: service || "General Inquiry", message, reference: refNum, botcheck: ""
+          };
+          const res = await fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(formData) });
+          const data = await res.json();
+          if (data.success) {
+            formWrap.style.display = "none"; refBadge.textContent = "Reference #" + refNum;
+            formSuccess.classList.add("show");
+            showToast("success", "Inquiry Sent!", "We'll get back to you within 1–2 business days.");
+          } else { throw new Error(data.message || "Submission failed"); }
+        } catch (err) {
+          const subject = encodeURIComponent("Inquiry [" + refNum + "] from " + name);
+          const body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\nService: " + (service || "General Inquiry") + "\n\nMessage:\n" + message);
+          window.open("mailto:akankshalab2007@gmail.com?subject=" + subject + "&body=" + body);
+          formWrap.style.display = "none"; refBadge.textContent = "Reference #" + refNum;
+          formSuccess.classList.add("show");
+          showToast("success", "Email Client Opened", "Please send the pre-filled email to complete your inquiry.");
+        } finally { setLoading(false); }
+      });
+
+      function selectService(serviceName) {
+        const serviceField = document.getElementById("inp_service");
+        if (serviceField) {
+          const optionToSelect = Array.from(serviceField.options).find((option) => option.text.trim() === serviceName.trim());
+          if (optionToSelect) serviceField.value = optionToSelect.value;
+        }
+        const contactSection = document.querySelector("#contact");
+        if (contactSection) contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+
+    <!-- ══════════════ GALLERY LIGHTBOX SCRIPT ══════════════ -->
+    <script>
+      (function () {
+        var glbImages = [];
+        var glbIndex  = 0;
+        var glbLightbox = document.getElementById('galleryLightbox');
+        var glbImg      = document.getElementById('galleryLightboxImg');
+        var glbLabel    = document.getElementById('galleryLightboxLabel');
+
+        function buildGalleryList() {
+          glbImages = [];
+          document.querySelectorAll('.gallery-item').forEach(function (item) {
+            var img   = item.querySelector('img');
+            var label = item.getAttribute('data-gallery-label') || (item.querySelector('.gallery-item-label') ? item.querySelector('.gallery-item-label').textContent : '');
+            if (img) glbImages.push({ src: img.src, label: label });
+          });
+        }
+
+        function openGalleryLightbox(index) {
+          buildGalleryList();
+          glbIndex = index;
+          showGalleryImage(glbIndex);
+          glbLightbox.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function showGalleryImage(index) {
+          glbIndex = (index + glbImages.length) % glbImages.length;
+          glbImg.src = glbImages[glbIndex].src;
+          glbImg.alt = glbImages[glbIndex].label;
+          glbLabel.textContent = glbImages[glbIndex].label + '  (' + (glbIndex + 1) + ' / ' + glbImages.length + ')';
+        }
+
+        window.closeGalleryLightbox = function () {
+          glbLightbox.classList.remove('open');
+          document.body.style.overflow = '';
+        };
+
+        window.galleryNav = function (dir) { showGalleryImage(glbIndex + dir); };
+
+        // Wire up every gallery item
+        document.querySelectorAll('.gallery-item').forEach(function (item, idx) {
+          item.style.cursor = 'pointer';
+          item.addEventListener('click', function () { openGalleryLightbox(idx); });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (e) {
+          if (!glbLightbox.classList.contains('open')) return;
+          if (e.key === 'ArrowRight') galleryNav(1);
+          if (e.key === 'ArrowLeft')  galleryNav(-1);
+          if (e.key === 'Escape')     closeGalleryLightbox();
+        });
+      })();
+    </script>
+
+  </body>
+</html>
